@@ -6,4 +6,17 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>dragon-web</artifactId>
+  
+  	<dependencies>
+		<dependency>
+			<artifactId>dragon-biz</artifactId>
+			<groupId>com.dragon</groupId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<artifactId>dragon-dmo</artifactId>
+			<groupId>com.dragon</groupId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
