@@ -10,10 +10,11 @@
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
+
 	<!-- 启动对@Aspectj的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 注解扫描包 -->
-	<context:component-scan base-package="com.dragon.controller" />
+	<context:component-scan base-package="com.hotel.controller" />
 	<!-- Spring为我们提供了一种极为方便注册这些BeanPostProcessor的方式， 即使用<context:annotation- 
 		config/>隐式地向 Spring容器注册 AutowiredAnnotationBeanPostProcessor、 RequiredAnnotationBeanPostProcessor、 
 		CommonAnnotationBeanPostProcessor以及 PersistenceAnnotationBeanPostProcessor这4个BeanPostProcessor -->
@@ -23,7 +24,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 静态资源的访问 -->
-	<mvc:resources location="/plugins/" mapping="/plugins/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
 
 	<!-- 返回JSON模版 -->
 	<bean
@@ -41,5 +42,5 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-s	
+
 </beans>
