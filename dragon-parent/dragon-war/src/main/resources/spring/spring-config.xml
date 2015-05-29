@@ -35,28 +35,19 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.dragon.entity">
-			<!-- <list>
-				<value>com.hotel.entity</value>
-			</list> -->
-		</property>
+		<property name="packagesToScan" value="com.dragon.entity"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
-				<prop key="hibernate.hibernate.connection.SetBigStringTryClob">${hibernate.hibernate.connection.SetBigStringTryClob}
-				</prop>
-				<prop key="hibernate.hibernate.archive.autodetection">${hibernate.hibernate.archive.autodetection}</prop>
-				<prop key="hibernate.hibernate.connection.charSet">${hibernate.hibernate.connection.charSet}</prop>
-				<prop key="hibernate.hibernate.cache.use_query_cache">${hibernate.hibernate.cache.use_query_cache}</prop>
-				<prop key="hibernate.hibernate.cache.use_second_level_cache">${hibernate.hibernate.cache.use_second_level_cache}
-				</prop>
-				<prop key="hibernate.hibernate.ejb.naming_strategy">${hibernate.hibernate.ejb.naming_strategy}</prop>
+				<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+				<prop key="hibernate.connection.SetBigStringTryClob">${hibernate.connection.SetBigStringTryClob}</prop>
+				<prop key="hibernate.archive.autodetection">${hibernate.archive.autodetection}</prop>
+				<prop key="hibernate.connection.charSet">${hibernate.connection.charSet}</prop>
 				<!-- 如果开启, Hibernate将收集有助于性能调节的统计数据.取值true|false -->
-				<prop key="hibernate.generate_statistics">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
 			</props>
 		</property>
 	</bean>
