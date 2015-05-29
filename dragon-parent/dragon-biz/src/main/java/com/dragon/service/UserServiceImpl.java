@@ -10,15 +10,16 @@ import com.dragon.common.dao.BaseDAO;
 import com.dragon.common.page.Page;
 import com.dragon.common.page.PageResultSet;
 import com.dragon.common.util.Util;
+import com.dragon.entity.Goods;
 import com.dragon.entity.User;
 import com.dragon.model.UserModel;
 
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl<T> implements UserService {
 
 	@Autowired
-	private BaseDAO<User> userDao;
+	private BaseDAO userDao;
 	
 	public void saveUser(User user) {
 		userDao.save(user);
@@ -101,11 +102,11 @@ public class UserServiceImpl implements UserService {
 		if (paramList.size() == 0) {
 			return null;
 		}
-		return userDao.get(hql.toString(), paramList.toArray());
+		return (User) userDao.get(hql.toString(), paramList.toArray());
 	}
 
 	public User getUserById(int id) {
-		return userDao.get(User.class, id);
+		return (User) userDao.get(User.class, id);
 	}
 
 	public PageResultSet<User> findPageUserList(UserModel userModel, int page,
@@ -156,5 +157,12 @@ public class UserServiceImpl implements UserService {
 
 		return pageResultSet;
 	}
+
+	@Override
+	public Goods getTest(int id) {
+		System.out.println("aaaaaaaaaaaa");
+		return (Goods) userDao.get(Goods.class, id);
+	}
+
 
 }

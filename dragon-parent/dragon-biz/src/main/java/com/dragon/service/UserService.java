@@ -4,6 +4,7 @@ package com.dragon.service;
 import java.util.List;
 
 import com.dragon.common.page.PageResultSet;
+import com.dragon.entity.Goods;
 import com.dragon.entity.User;
 import com.dragon.model.UserModel;
 
@@ -70,4 +71,6 @@ public interface UserService {
 	 * @return
 	 */
 	public PageResultSet<User> findPageUserList(UserModel userModel, int page, int pageSize);
+	
+	public Goods getTest(int id);
 }

@@ -3,6 +3,8 @@ package com.dragon.common.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import com.dragon.entity.Goods;
+
 /**
  * 基础数据库操作类
  * 
@@ -99,7 +101,7 @@ public interface BaseDAO<T> {
 	 * @return Object
 	 */
 	public T get(Class<T> c, Serializable id);
-
+	
 	/**
 	 * 获得一个对象
 	 * 
@@ -169,5 +171,8 @@ public interface BaseDAO<T> {
 	 * @return
 	 */
 	public Integer executeHql(String hql, List<Object> param);
+
+
+
 
 }
