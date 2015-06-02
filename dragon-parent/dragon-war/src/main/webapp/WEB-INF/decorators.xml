@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/layout">
+	<decorator name="communityLayout" page="communityLayout.jsp">
+		<pattern>/community/*</pattern>
+	</decorator>
+	<!-- 单独排除渲染的页面 -->
+	<excludes>
+	</excludes>
+</decorators>

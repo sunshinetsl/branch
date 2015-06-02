@@ -24,7 +24,9 @@
 	<mvc:annotation-driven />
 
 	<!-- 静态资源的访问 -->
-	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/plugins/" mapping="/plugins/**" />
+	<mvc:resources location="/common/" mapping="/common/**" />
+	<mvc:resources location="/layout/" mapping="/layout/**" />
 
 	<!-- 返回JSON模版 -->
 	<bean

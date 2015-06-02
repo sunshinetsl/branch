@@ -160,7 +160,6 @@ public class UserServiceImpl<T> implements UserService {
 
 	@Override
 	public Goods getTest(int id) {
-		System.out.println("aaaaaaaaaaaa");
 		return (Goods) userDao.get(Goods.class, id);
 	}
 

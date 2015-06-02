@@ -1,16 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.dragon</groupId>
-  <artifactId>dragon-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>dragon-web</module>
-  	<module>dragon-biz</module>
-  	<module>dragon-dmo</module>
-  	<module>dragon-war</module>
-  </modules>
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.dragon</groupId>
+	<artifactId>dragon-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>dragon-web</module>
+		<module>dragon-biz</module>
+		<module>dragon-dmo</module>
+		<module>dragon-war</module>
+	</modules>
+	<properties>
 		<springframework.version>4.0.6.RELEASE</springframework.version>
 		<hibernate.version>4.3.1.Final</hibernate.version>
 		<mysql.version>5.1.31</mysql.version>
@@ -175,6 +176,13 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.1.3.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 		<!--<dependency> -->
 		<!--<groupId>org.springframework</groupId> -->
 		<!--<artifactId>spring-jms</artifactId> -->
@@ -234,6 +242,32 @@
 			<artifactId>jboss-logging</artifactId>
 			<version>3.1.0.CR2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>2.4.2</version>
+		</dependency>
 	</dependencies>
 </project>
