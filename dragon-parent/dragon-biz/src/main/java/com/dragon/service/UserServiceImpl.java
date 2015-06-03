@@ -15,7 +15,7 @@ import com.dragon.entity.User;
 import com.dragon.model.UserModel;
 
 
-@Service("userService")
+@Service("userServiceImpl")
 public class UserServiceImpl<T> implements UserService {
 
 	@Autowired

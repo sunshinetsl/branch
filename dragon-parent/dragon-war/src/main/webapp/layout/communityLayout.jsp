@@ -6,12 +6,14 @@
 <%@ include file="/common/meta.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <base href="<%=basePath%>">
     <title></title>
+     <decorator:head /> 
 </head>
 <body class="c_nav-top">
 	<!-- header start -->
-	<%@ include file="/layout/header_navigator.jsp" %>
+	<%@ include file="/layout/header_navigator.jsp" %> 
 	<%@ include file="/layout/header_community.jsp" %>
 	<!-- header end -->
 	<!-- main start -->

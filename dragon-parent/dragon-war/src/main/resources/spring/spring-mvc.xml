@@ -14,7 +14,7 @@
 	<!-- 启动对@Aspectj的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 注解扫描包 -->
-	<context:component-scan base-package="com.hotel.controller" />
+	<context:component-scan base-package="com.dragon.*" />
 	<!-- Spring为我们提供了一种极为方便注册这些BeanPostProcessor的方式， 即使用<context:annotation- 
 		config/>隐式地向 Spring容器注册 AutowiredAnnotationBeanPostProcessor、 RequiredAnnotationBeanPostProcessor、 
 		CommonAnnotationBeanPostProcessor以及 PersistenceAnnotationBeanPostProcessor这4个BeanPostProcessor -->
@@ -25,8 +25,8 @@
 
 	<!-- 静态资源的访问 -->
 	<mvc:resources location="/plugins/" mapping="/plugins/**" />
-	<mvc:resources location="/common/" mapping="/common/**" />
-	<mvc:resources location="/layout/" mapping="/layout/**" />
+	<!-- <mvc:resources location="/common/" mapping="/common/**" /> -->
+	<!-- <mvc:resources location="/layout/" mapping="/layout/**" /> -->
 
 	<!-- 返回JSON模版 -->
 	<bean

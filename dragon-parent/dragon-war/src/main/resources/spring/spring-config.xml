@@ -13,9 +13,9 @@
       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- 打开spring的annotation的支持 -->
-	<!-- <context:annotation-config /> -->
+	<context:annotation-config />
 	<!-- 设定spring去那些包中找annotation -->
-	<context:component-scan base-package="com.dragon"/>
+	<!-- <context:component-scan base-package="com.dragon"/> -->
 
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<!-- 配置数据源，从上面配置文件读取 -->
