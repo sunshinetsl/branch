@@ -19,7 +19,7 @@
 			<div class="header_sub">
 				<div class="h_menu">
 					<ul>
-						<li class="active"><a href="home/show">主页</a></li>
+						<li class="active"><a href="${ctx}/homePage.html">介绍</a></li>
 						<li><a href="about/page">关于我们</a></li>
 						<li><a href="jsp/demo/service.html">服务</a></li>
 						<li><a href="jsp/demo/index.html">页面</a></li>
@@ -73,7 +73,7 @@
 			$(".text").focus();
 		});
 	</script>
-				<script type="text/javascript" src="../plugins/js/script.js"></script>
+				<script type="text/javascript" src="${ctx}/plugins/js/script.js"></script>
 				<div class="clear"></div>
 
 				<div class="clear"></div>

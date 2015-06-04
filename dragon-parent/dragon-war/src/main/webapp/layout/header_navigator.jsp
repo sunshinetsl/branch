@@ -11,7 +11,7 @@
 			<div class="header">
 				<div class="logo">
 					<a href="home/show"><img
-						src="../plugins/images/logo.png" alt="" /> </a>
+						src="${ctx}/plugins/images/logo.png" alt="" /> </a>
 				</div>
 				<div class="social-icons">
 					<ul>
