@@ -15,10 +15,12 @@
 				</div>
 				<div class="social-icons">
 					<ul>
+						<!-- <li><a href="#" target="_blank"></a></li>
 						<li><a href="#" target="_blank"></a></li>
 						<li><a href="#" target="_blank"></a></li>
-						<li><a href="#" target="_blank"></a></li>
-						<li><a href="#" target="_blank"></a></li>
+						<li><a href="#" target="_blank"></a></li> -->
+						<li><a href="#" target="_blank" style="color:white;">注册</a></li>
+						<li><a href="#" target="_blank" style="color:white;">登录</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>

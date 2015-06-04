@@ -5,26 +5,43 @@
 <head>
 <title></title>
 <script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-			});
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1200);
 		});
-	</script>
+		var url = $('#rootPath').val() + '/func/getMenu';
+		$.ajax({
+			url : url,
+			type : 'post',
+			cache : false,
+			async : false,
+			dataType : "json",
+			success : function(data) {
+				var str = '';
+				for (var i = 0; i < data.list.length; i++) {
+					str += '<li><a href="'+data.list[i].funcAction+'">'+data.list[i].funcName+'</a></li>';
+				}
+				$('#tipLabel').html(str);
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="header_btm">
 		<div class="wrap">
 			<div class="header_sub">
 				<div class="h_menu">
-					<ul>
-						<li class="active"><a href="${ctx}/homePage.html">介绍</a></li>
+					<ul id="tipLabel">
+						<%-- <li class="active"><a href="${ctx}/homePage.html">介绍</a></li>
 						<li><a href="about/page">关于我们</a></li>
 						<li><a href="jsp/demo/service.html">服务</a></li>
 						<li><a href="jsp/demo/index.html">页面</a></li>
 						<li><a href="jsp/demo/blog.html">论坛</a></li>
-						<li><a href="jsp/demo/contact.html">加入我们</a></li>
+						<li><a href="jsp/demo/contact.html">加入我们</a></li> --%>
 					</ul>
 				</div>
 				<div class="h_search">
@@ -58,21 +75,21 @@
 					<div class="clear"></div>
 				</div>
 				<script type="text/javascript">
-		$(".menu,.search").hide();
-		$("#menu").click(function(){
-			$(".menu").toggle();
-			$(".search").hide();
-			$("#search").removeClass("active");
-			$("#menu").toggleClass("active");
-		});
-		$("#search").click(function(){
-			$(".search").toggle();
-			$(".menu").hide();
-			$("#menu").removeClass("active");
-			$("#search").toggleClass("active");
-			$(".text").focus();
-		});
-	</script>
+					$(".menu,.search").hide();
+					$("#menu").click(function() {
+						$(".menu").toggle();
+						$(".search").hide();
+						$("#search").removeClass("active");
+						$("#menu").toggleClass("active");
+					});
+					$("#search").click(function() {
+						$(".search").toggle();
+						$(".menu").hide();
+						$("#menu").removeClass("active");
+						$("#search").toggleClass("active");
+						$(".text").focus();
+					});
+				</script>
 				<script type="text/javascript" src="${ctx}/plugins/js/script.js"></script>
 				<div class="clear"></div>
 

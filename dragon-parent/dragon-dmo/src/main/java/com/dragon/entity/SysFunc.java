@@ -25,19 +25,20 @@ public class SysFunc implements java.io.Serializable {
 	private String funcType;
 	private String funcAction;
 	private String funcDesc;
-	private Integer sysCategoryId;
+	private Integer parentId;
 	private Integer displaySequence;
+	private String statusCode;
 
 	public SysFunc() {
 	}
 
 	public SysFunc(String funcName, String funcType, String funcAction,
-			String funcDesc, Integer sysCategoryId, Integer displaySequence) {
+			String funcDesc, Integer parentId, Integer displaySequence) {
 		this.funcName = funcName;
 		this.funcType = funcType;
 		this.funcAction = funcAction;
 		this.funcDesc = funcDesc;
-		this.sysCategoryId = sysCategoryId;
+		this.parentId = parentId;
 		this.displaySequence = displaySequence;
 	}
 
@@ -88,22 +89,32 @@ public class SysFunc implements java.io.Serializable {
 		this.funcDesc = funcDesc;
 	}
 
-	@Column(name = "sys_category_id")
-	public Integer getSysCategoryId() {
-		return this.sysCategoryId;
-	}
-
-	public void setSysCategoryId(Integer sysCategoryId) {
-		this.sysCategoryId = sysCategoryId;
-	}
-
 	@Column(name = "display_sequence")
 	public Integer getDisplaySequence() {
 		return this.displaySequence;
 	}
-
+	
 	public void setDisplaySequence(Integer displaySequence) {
 		this.displaySequence = displaySequence;
 	}
+	
+	@Column(name = "parent_id")
+	public Integer getParentId() {
+		return parentId;
+	}
 
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	@Column(name = "status_code", length = 45)
+	public String getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
+	
+	
 }

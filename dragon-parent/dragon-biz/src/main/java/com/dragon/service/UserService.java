@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dragon.common.page.PageResultSet;
+import com.dragon.dto.UserModel;
 import com.dragon.entity.Goods;
 import com.dragon.entity.User;
-import com.dragon.model.UserModel;
 
 
 

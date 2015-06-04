@@ -1,4 +1,4 @@
-package com.dragon.model;
+package com.dragon.dto;
 
 import java.io.Serializable;
 import java.util.Date;

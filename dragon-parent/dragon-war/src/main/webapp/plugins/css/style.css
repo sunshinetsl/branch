@@ -54,18 +54,12 @@ body {
 }
 .social-icons li a {
 	height: 26px;
-	width: 26px;
+	width: 35px;
 	display: block;
-	background:url(../images/soc_icons.png);
 }
-.social-icons li:nth-child(1) a{
-	background: url(../images/soc_icons.png) 0% 0%;
-}
+
 .social-icons li:nth-child(1) a:hover{
 	background: url(../images/soc_icons.png) 0% 98%;
-}
-.social-icons li:nth-child(2) a{
-	background: url(../images/soc_icons.png) 32% 0%;
 }
 .social-icons li:nth-child(2) a:hover{
 	background: url(../images/soc_icons.png) 32% 98%;
