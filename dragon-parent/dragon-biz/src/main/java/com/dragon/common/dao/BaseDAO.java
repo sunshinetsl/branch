@@ -32,19 +32,19 @@ public class BaseDAO<T> {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public Serializable save(T o) {
-		return this.getCurrentSession().save(o);
+	public int save(T o) throws Exception{
+		return (int) this.getCurrentSession().save(o);
 	}
 
-	public void delete(T o) {
+	public void delete(T o) throws Exception {
 		this.getCurrentSession().delete(o);
 	}
 
-	public void update(T o) {
+	public void update(T o) throws Exception{
 		this.getCurrentSession().update(o);
 	}
 
-	public void saveOrUpdate(T o) {
+	public void saveOrUpdate(T o) throws Exception{
 		this.getCurrentSession().saveOrUpdate(o);
 	}
 

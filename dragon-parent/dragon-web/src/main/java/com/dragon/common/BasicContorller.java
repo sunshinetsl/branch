@@ -6,6 +6,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 /**
  * contorller
  * 
@@ -21,6 +23,7 @@ public class BasicContorller {
 	protected ServletContext servletContext;
 	protected String path;
 	protected String basePath;
+	public Gson gson = new Gson();
 	
 	public BasicContorller() {
 		

@@ -2,8 +2,18 @@ package com.dragon.controller.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.dragon.common.BasicContorller;
+import com.dragon.dto.MessageDTO;
+import com.dragon.dto.UserDTO;
+import com.dragon.service.account.AccountService;
 
 /**
  * 账号管理
@@ -12,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping
-public class AccountController {
+public class AccountController extends BasicContorller{
 
 	private Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
+	@Autowired
+	private AccountService accountService;
 	/**
 	 * 注册页面
 	 * @return
@@ -23,6 +36,41 @@ public class AccountController {
 	public String regPage(){
 		if(logger.isDebugEnabled()){
 			logger.debug("regPage -->start");
+		}
+		return "account/regPage";
+	}
+	
+	/**
+	 * 注册
+	 * @return
+	 */
+	@RequestMapping("reg")
+	@ResponseBody
+	public ModelMap reg(String account, String passWord, String rePassWord){
+		if(logger.isDebugEnabled()){
+			logger.debug("reg (account={},passWord={},rePassWord={})",account, passWord, rePassWord);
+		}
+		MessageDTO msg = new MessageDTO();
+		ModelMap model = new ModelMap();
+		int count = accountService.checkAccount(account);
+		if(count > 0){
+			msg.setFlag("1");
+			msg.setCause("用户名已存在");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
+		if(!passWord.equals(rePassWord)){
+			msg.setFlag("1");
+			msg.setCause("两次密码输入不一样");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
+		int sign = accountService.saveRegAccount(account,passWord);
+		if(sign > 0){
+			msg.setFlag("0");
+			msg.setCause("注册成功");
+			model.addAttribute("callBack",msg);
+			return model;
 		}
 		return null;
 	}
