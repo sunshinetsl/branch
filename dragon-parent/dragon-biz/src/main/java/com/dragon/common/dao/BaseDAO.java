@@ -33,7 +33,7 @@ public class BaseDAO<T> {
 	}
 
 	public int save(T o) throws Exception{
-		return (int) this.getCurrentSession().save(o);
+		return (Integer) this.getCurrentSession().save(o);
 	}
 
 	public void delete(T o) throws Exception {

@@ -30,7 +30,6 @@ public class AccountServiceImpl<T> implements AccountService{
 	/**
 	 * 
 	 */
-	@Override
 	public int checkAccount(String account) {
 		if(logger.isDebugEnabled()){
 			logger.debug("checkAccount -->start");
@@ -46,7 +45,6 @@ public class AccountServiceImpl<T> implements AccountService{
 	/**
 	 * 
 	 */
-	@Override
 	public int saveRegAccount(String account, String passWord) {
 		int sign = 0;
 		if(StringUtils.isBlank(account) || StringUtils.isBlank(passWord)){
@@ -59,7 +57,6 @@ public class AccountServiceImpl<T> implements AccountService{
 	/**
 	 * 查询账号信息
 	 */
-	@Override
 	public UserInfo queryAccount(String account) {
 		UserInfo user = null;
 		if(StringUtils.isBlank(account)){

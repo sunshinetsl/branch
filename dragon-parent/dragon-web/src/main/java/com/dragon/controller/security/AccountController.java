@@ -1,5 +1,6 @@
 package com.dragon.controller.security;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,9 +75,12 @@ public class AccountController extends BasicContorller{
 			msg.setFlag("0");
 			msg.setCause("注册成功");
 			model.addAttribute("callBack",msg);
-			return model;
+		}else{
+			msg.setFlag("1");
+			msg.setCause("注册失败");
+			model.addAttribute("callBack",msg);
 		}
-		return null;
+		return model;
 	}
 	
 	/**
@@ -96,7 +100,7 @@ public class AccountController extends BasicContorller{
 			model.addAttribute("callBack",msg);
 			return model;
 		}
-		if(!passWord.equals(user.getPassWord())){
+		if(!DigestUtils.md5Hex(passWord).equals(user.getPassWord())){
 			msg.setFlag("1");
 			msg.setCause("密码错误");
 			model.addAttribute("callBack",msg);

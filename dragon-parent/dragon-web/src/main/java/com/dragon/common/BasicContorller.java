@@ -6,6 +6,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletWebRequest;
+
 import com.google.gson.Gson;
 
 /**
@@ -15,11 +21,13 @@ import com.google.gson.Gson;
  * 
  * 2015-5-8
  */
+@Controller
 public class BasicContorller {
 
-	protected HttpServletRequest request;
-	protected HttpServletResponse response;
+	@Autowired
+	private HttpServletRequest request;
 	private Map<String, Object> session;
+	@Autowired
 	protected ServletContext servletContext;
 	protected String path;
 	protected String basePath;
@@ -29,6 +37,9 @@ public class BasicContorller {
 		
 	}
 	
+	public static HttpServletResponse getResponse() {
+        return ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
+    }
 
 	public String getBasePath() {
 		basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -54,14 +65,6 @@ public class BasicContorller {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
-	}
-
-	public HttpServletResponse getResponse() {
-		return response;
-	}
-
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
 	}
 
 	public Map<String, Object> getSession() {

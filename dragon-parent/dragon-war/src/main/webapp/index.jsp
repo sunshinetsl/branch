@@ -2,7 +2,6 @@
 <%
 final String queryString = request.getQueryString();
 final String url = request.getContextPath() + "/home/show";
-
 response.sendRedirect(url);
 %>
 

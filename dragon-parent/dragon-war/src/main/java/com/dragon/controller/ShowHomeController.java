@@ -8,27 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dragon.common.BasicContorller;
+
 /**
  * 主页转向
  * @author Administrator
  *
  */
 @Controller
-@RequestMapping(value="home")
-public class ShowHomeController {
+@RequestMapping("/home")
+public class ShowHomeController extends BasicContorller{
 	
 	private Logger logger = LoggerFactory.getLogger(ShowHomeController.class);
-	
-	@Autowired  
-	private  HttpServletRequest request;  
+
 	
 	/**
 	 * 转向方法
 	 * @return
 	 */
-	@RequestMapping(value="show")
+	@RequestMapping("/show")
 	public String showHome(){
 		logger.info("showHome -->start");
+		System.out.println(super.getRequest().getContextPath());
 		return "redirect:/homePage.html";
 	}
 }

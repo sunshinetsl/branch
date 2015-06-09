@@ -18,56 +18,47 @@ import com.dragon.entity.User;
 @Service("userServiceImpl")
 public class UserServiceImpl<T> implements UserService {
 
-	@Override
 	public void saveUser(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public List<User> findAllUserList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public List<User> findUserListByCondition(UserModel userModel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public User findUserByByCondition(UserModel userModel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public User getUserById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public PageResultSet<User> findPageUserList(UserModel userModel, int page,
 			int pageSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Goods getTest(int id) {
 		// TODO Auto-generated method stub
 		return null;
