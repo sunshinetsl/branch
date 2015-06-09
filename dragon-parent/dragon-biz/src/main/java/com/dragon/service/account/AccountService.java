@@ -2,6 +2,8 @@ package com.dragon.service.account;
 
 import org.springframework.stereotype.Service;
 
+import com.dragon.entity.UserInfo;
+
 /**
  * 账号逻辑层
  * @author Administrator
@@ -24,5 +26,12 @@ public interface AccountService {
 	 * @return
 	 */
 	int saveRegAccount(String account, String passWord);
+
+	/**
+	 * 查询账号信息
+	 * @param account
+	 * @return
+	 */
+	UserInfo queryAccount(String account);
 
 }

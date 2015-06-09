@@ -51,7 +51,7 @@ public class BaseDAO<T> {
 	public List<T> find(String hql) {
 		return this.getCurrentSession().createQuery(hql).list();
 	}
-
+	
 	public List<T> find(String hql, Object[] param) {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.length > 0) {

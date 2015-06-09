@@ -1,7 +1,9 @@
 package com.dragon.dao.account;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -54,6 +56,24 @@ public class AccountDAO<T> extends BaseDAO<T>{
 			e.printStackTrace();
 		}
 		return sign;
+	}
+
+	/**
+	 * 查询账号信息
+	 * @param account
+	 * @return
+	 */
+	public UserInfo queryAccount(String account) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("from UserInfo u where 1=1 ");
+		List<Object> list = new ArrayList<Object>();
+		if(StringUtils.isNotBlank(account)){
+			builder.append(" and u.account = ?");
+			list.add(account);
+		}
+		String hql = builder.toString();
+		UserInfo user = (UserInfo) super.get(hql, list.toArray());
+		return user;
 	}
 
 }

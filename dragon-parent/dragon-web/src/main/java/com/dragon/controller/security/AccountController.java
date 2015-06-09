@@ -1,5 +1,6 @@
 package com.dragon.controller.security;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dragon.common.BasicContorller;
 import com.dragon.dto.MessageDTO;
 import com.dragon.dto.UserDTO;
+import com.dragon.entity.UserInfo;
 import com.dragon.service.account.AccountService;
 
 /**
@@ -28,6 +30,10 @@ public class AccountController extends BasicContorller{
 	
 	@Autowired
 	private AccountService accountService;
+	
+	private MessageDTO msg = new MessageDTO();
+	
+	private ModelMap model = new ModelMap();
 	/**
 	 * 注册页面
 	 * @return
@@ -50,8 +56,6 @@ public class AccountController extends BasicContorller{
 		if(logger.isDebugEnabled()){
 			logger.debug("reg (account={},passWord={},rePassWord={})",account, passWord, rePassWord);
 		}
-		MessageDTO msg = new MessageDTO();
-		ModelMap model = new ModelMap();
 		int count = accountService.checkAccount(account);
 		if(count > 0){
 			msg.setFlag("1");
@@ -73,5 +77,34 @@ public class AccountController extends BasicContorller{
 			return model;
 		}
 		return null;
+	}
+	
+	/**
+	 * 登录
+	 * @param account
+	 * @param passWord
+	 * @return
+	 */
+	@RequestMapping("login")
+	@ResponseBody
+	public ModelMap login(String account, String passWord){
+		logger.debug("login(account={},passWord={} -->start)",account,passWord);
+		UserInfo user = accountService.queryAccount(account);
+		if(null == user){
+			msg.setFlag("1");
+			msg.setCause("用户名不存在");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
+		if(!passWord.equals(user.getPassWord())){
+			msg.setFlag("1");
+			msg.setCause("密码错误");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
+		msg.setFlag("0");
+		msg.setCause("登录成功");
+		model.addAttribute("callBack",msg);
+		return model;
 	}
 }
