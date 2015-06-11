@@ -76,4 +76,22 @@ public class AccountDAO<T> extends BaseDAO<T>{
 		return user;
 	}
 
+	/**
+	 * 根据用户ID查询
+	 * @param userId
+	 * @return
+	 */
+	public UserInfo selectUserInfoByPrimaryKey(Integer userId) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("from UserInfo u where 1=1 ");
+		List<Object> params = new ArrayList<Object>();
+		if(null != userId && 0 != userId){
+			builder.append(" and u.id = ?");
+			params.add(userId);
+		}
+		String hql = builder.toString();
+		UserInfo user = (UserInfo) super.get(hql, params);
+		return user;
+	}
+
 }

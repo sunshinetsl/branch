@@ -9,12 +9,7 @@
 	 $('#sub').click(function(){
 		 var account = $('#account').val();
 		 var passWord = $('#passWord').val();
-		 var rePassWord = $('#rePassWord').val();
-		 if(passWord != rePassWord){
-			 alert('两次密码输入不一样');
-			 return false;
-		 }
-		 var url = $('#rootPath').val()+'/reg';
+		 var url = $('#rootPath').val()+'/login';
 		 $.ajax({
 			url : url,
 			type : 'post',
@@ -23,15 +18,14 @@
 			dataType : "json",
 			data:{
 				account:account,
-				passWord:passWord,
-				rePassWord:rePassWord
+				passWord:passWord
 			},
 			dataType : "json",
 			success : function(data) {
 				if(data.callBack.flag == 1){
 					alert(data.callBack.cause);
 				}else{
-					alert("注册成功");
+					alert("登录成功");
 					window.location.href = $('#rootPath').val()+'/homePage.html';
 				}
 			}
@@ -55,18 +49,14 @@
 			  <div class="contact-form">
 		    	<div>
 			    	<span><label>用户名</label></span>
-			    	<span><input id="account" name="userDTO.account" type="text" class="textbox"></span>
+			    	<span><input id="account" name="account" type="text" class="textbox"></span>
 			    </div>
 			    <div>
 			    	<span><label>密码</label></span>
-			    	<span><input id="passWord" name="userDTO.passWord" type="password" class="textbox"></span>
-			    </div>
-			    <div>
-			     	<span><label>确认密码</label></span>
-			    	<span><input id="rePassWord"  name="userDTO.rePassWord" type="password" class="textbox"></span>
+			    	<span><input id="passWord" name="passWord" type="password" class="textbox"></span>
 			    </div>
 			   <div>
-			   		<span><input id="sub" type="button" class="" value="提交" ></span>
+			   		<span><input id="sub" type="button" class="" value="登录" ></span>
 			  </div>
 			 </div>
 			<div class="clear"> </div>		

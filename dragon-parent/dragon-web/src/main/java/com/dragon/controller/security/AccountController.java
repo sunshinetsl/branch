@@ -35,7 +35,7 @@ public class AccountController extends BasicContorller{
 	 * 注册页面
 	 * @return
 	 */
-	@RequestMapping("regPage")
+	@RequestMapping("/regPage")
 	public String regPage(){
 		if(logger.isDebugEnabled()){
 			logger.debug("regPage -->start");
@@ -47,7 +47,7 @@ public class AccountController extends BasicContorller{
 	 * 注册
 	 * @return
 	 */
-	@RequestMapping("reg")
+	@RequestMapping("/reg")
 	@ResponseBody
 	public ModelMap reg(String account, String passWord, String rePassWord){
 		if(logger.isDebugEnabled()){
@@ -80,12 +80,25 @@ public class AccountController extends BasicContorller{
 	}
 	
 	/**
+	 * 登录页面
+	 * @return
+	 */
+	@RequestMapping("/loginPage")
+	public String loginPage(){
+		if(logger.isDebugEnabled()){
+			logger.debug("loginPage -->start");
+		}
+		return "account/loginPage";
+	}
+	
+	
+	/**
 	 * 登录
 	 * @param account
 	 * @param passWord
 	 * @return
 	 */
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	@ResponseBody
 	public ModelMap login(String account, String passWord){
 		logger.debug("login(account={},passWord={} -->start)",account,passWord);
@@ -105,6 +118,19 @@ public class AccountController extends BasicContorller{
 		msg.setFlag("0");
 		msg.setCause("登录成功");
 		model.addAttribute("callBack",msg);
+		accountService.setUserSession(user,super.getRequest());
 		return model;
+	}
+	
+	/**
+	 * 注销登录
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	public String logout(){
+		if(logger.isDebugEnabled()){
+			logger.debug("logout");
+		}
+		return "redirect:homePage.html";
 	}
 }

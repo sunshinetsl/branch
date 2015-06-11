@@ -21,7 +21,7 @@ import com.dragon.service.func.SysFuncService;
  *
  */
 @Controller
-@RequestMapping("func")
+@RequestMapping("/func")
 public class SysFuncController extends BasicContorller{
 
 	private Logger logger = LoggerFactory.getLogger(SysFuncController.class);
@@ -33,7 +33,7 @@ public class SysFuncController extends BasicContorller{
 	 * 取菜单
 	 * @return
 	 */
-	@RequestMapping("getMenu")
+	@RequestMapping("/getMenu")
 	@ResponseBody
 	public ModelMap ajaxGetFunctionMenu(){
 		logger.debug("ajaxGetFunctionMenu --.start");

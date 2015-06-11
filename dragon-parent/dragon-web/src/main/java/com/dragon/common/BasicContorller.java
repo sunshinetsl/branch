@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import com.dragon.bean.UserSessionInfo;
 import com.google.gson.Gson;
 
 /**
@@ -91,5 +92,7 @@ public class BasicContorller {
 		this.basePath = basePath;
 	}
 	
-	
+	public UserSessionInfo getSessionUserInfo(){
+		return (UserSessionInfo) this.getRequest().getSession().getAttribute("userSessionInfo");
+	}
 }

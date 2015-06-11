@@ -17,7 +17,8 @@
 		<mysql.version>5.1.31</mysql.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
-		<springframework.security.version>4.0.1.RELEASE</springframework.security.version>
+		<springframework.security.version>3.2.5.RELEASE</springframework.security.version>
+		<c3p0.version>0.9.1.2</c3p0.version>
 	</properties>
 
 	<dependencies>
@@ -91,7 +92,7 @@
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
+			<version>${c3p0.version}</version>
 		</dependency>
 
 		<!-- JUnit -->

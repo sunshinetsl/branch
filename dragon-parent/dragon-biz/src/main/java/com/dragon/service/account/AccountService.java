@@ -1,5 +1,7 @@
 package com.dragon.service.account;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
 import com.dragon.entity.UserInfo;
@@ -33,5 +35,18 @@ public interface AccountService {
 	 * @return
 	 */
 	UserInfo queryAccount(String account);
+
+	/**
+	 * 设置session信息
+	 * @param user
+	 */
+	void setUserSession(UserInfo user, HttpServletRequest request);
+
+	/**
+	 * 根据用户ID查询
+	 * @param userid
+	 * @return
+	 */
+	UserInfo selectUserInfoByPrimaryKey(Integer userid);
 
 }

@@ -4,31 +4,31 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans   
             http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
             http://www.springframework.org/schema/security   
-            http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<!-- Spring-Security 的配置 -->
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/regPage">
 
-	<security:http auto-config="true" use-expressions="true">
+		<!-- <security:intercept-url pattern="/home/show" access="permitAll" />
+		<security:intercept-url pattern="/func/**" access="permitAll" />
+		<security:intercept-url pattern="/regPage.html" access="permitAll" />
+		<security:intercept-url pattern="/reg" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" /> -->
+		<!-- <security:intercept-url pattern="/common/**" access="permitAll" />
+		<security:intercept-url pattern="/layout/**" access="denyAll" />
+		<security:intercept-url pattern="/plugins/**" access="permitAll" /> -->
+		<!-- <security:intercept-url pattern="/layout/**" access="hasRole('ROLE_ADMIN')" 
+			/> <security:intercept-url pattern="/main/common" access="hasRole('ROLE_USER')" 
+			/> -->
 
-		<security:intercept-url pattern="/auth/login"
-			access="permitAll" />
-		<security:intercept-url pattern="/main/admin"
-			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/main/common"
-			access="hasRole('ROLE_USER')" />
+		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/home/show" />
 
-		<security:form-login login-page="/auth/login"
-			authentication-failure-url="/auth/login?error=true"
-			default-target-url="/main/common" />
-
-		<security:logout invalidate-session="true"
-			logout-success-url="/auth/login" logout-url="/auth/logout" />
-
+		<security:logout invalidate-session="true" logout-success-url="/logout" logout-url="/home/show" />
 	</security:http>
 
 	<!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
 	<security:authentication-manager>
-		<security:authentication-provider
-			user-service-ref="userDetailsService">
+		<security:authentication-provider user-service-ref="securityUserService">
 			<security:password-encoder ref="passwordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
@@ -39,5 +39,6 @@
 		id="passwordEncoder" />
 
 	<!-- 通过 customUserDetailsService,Spring会自动的用户的访问级别. 也可以理解成:以后我们和数据库操作就是通过customUserDetailsService来进行关联. -->
-	<bean id="userDetailsService" class="com.dragon.service.account.AccountServiceImpl" />
+	<bean id="securityUserService" class="com.dragon.common.serurity.UserDetailsServiceImpl" />
+
 </beans>
