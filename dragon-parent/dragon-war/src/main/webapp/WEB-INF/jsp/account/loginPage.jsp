@@ -9,7 +9,7 @@
 	 $('#sub').click(function(){
 		 var account = $('#account').val();
 		 var passWord = $('#passWord').val();
-		 var url = $('#rootPath').val()+'/login';
+		 var url = $('#rootPath').val()+'/account/login';
 		 $.ajax({
 			url : url,
 			type : 'post',

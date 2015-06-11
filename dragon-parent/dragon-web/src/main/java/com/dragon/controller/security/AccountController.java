@@ -20,7 +20,7 @@ import com.dragon.service.account.AccountService;
  *
  */
 @Controller
-@RequestMapping
+@RequestMapping("/account")
 public class AccountController extends BasicContorller{
 
 	private Logger logger = LoggerFactory.getLogger(AccountController.class);
@@ -131,6 +131,6 @@ public class AccountController extends BasicContorller{
 		if(logger.isDebugEnabled()){
 			logger.debug("logout");
 		}
-		return "redirect:homePage.html";
+		return "redirect:../homePage.html";
 	}
 }

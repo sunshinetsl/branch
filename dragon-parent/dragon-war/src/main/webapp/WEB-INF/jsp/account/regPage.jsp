@@ -14,7 +14,7 @@
 			 alert('两次密码输入不一样');
 			 return false;
 		 }
-		 var url = $('#rootPath').val()+'/reg';
+		 var url = $('#rootPath').val()+'/account/reg';
 		 $.ajax({
 			url : url,
 			type : 'post',
