@@ -26,7 +26,7 @@
 					alert(data.callBack.cause);
 				}else{
 					alert("登录成功");
-					window.location.href = $('#rootPath').val()+'/homePage.html';
+					//window.location.href = $('#rootPath').val()+'/homePage.html';
 				}
 			}
 		 });

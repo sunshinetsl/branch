@@ -24,7 +24,7 @@ public class UserInfo implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 8365465661959402850L;
 	private Integer id;
-	private String userName;
+	private String nickName;
 	private String email;
 	private String mobile;
 	private String passWord;
@@ -41,11 +41,11 @@ public class UserInfo implements java.io.Serializable {
 	public UserInfo() {
 	}
 
-	public UserInfo(String userName, String email, String mobile,
+	public UserInfo(String nickName, String email, String mobile,
 			String passWord, String account, String cardType, String cardNo,
 			String sex, String statusCode, Date createTime, Date updateTime,
 			String headPortraitNormal, String headPortraitThumb) {
-		this.userName = userName;
+		this.nickName = nickName;
 		this.email = email;
 		this.mobile = mobile;
 		this.passWord = passWord;
@@ -70,14 +70,14 @@ public class UserInfo implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@Column(name = "user_name", length = 45)
-	public String getUserName() {
-		return this.userName;
+	
+	@Column(name = "nick_name", length = 45)
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	@Column(name = "email", length = 45)

@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,9 @@ public class AccountController extends BasicContorller{
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private UserDetailsService securityUserService;
 	
 	private MessageDTO msg = new MessageDTO();
 	
@@ -71,6 +75,8 @@ public class AccountController extends BasicContorller{
 			msg.setFlag("0");
 			msg.setCause("注册成功");
 			model.addAttribute("callBack",msg);
+			UserInfo user = accountService.queryAccount(account);
+			securityUserService.loadUserByUsername(user.getAccount());
 		}else{
 			msg.setFlag("1");
 			msg.setCause("注册失败");
@@ -118,7 +124,7 @@ public class AccountController extends BasicContorller{
 		msg.setFlag("0");
 		msg.setCause("登录成功");
 		model.addAttribute("callBack",msg);
-		accountService.setUserSession(user,super.getRequest());
+		securityUserService.loadUserByUsername(user.getAccount());
 		return model;
 	}
 	
