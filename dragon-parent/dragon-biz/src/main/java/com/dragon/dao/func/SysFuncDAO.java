@@ -26,6 +26,7 @@ public class SysFuncDAO<T> extends BaseDAO<T>{
 		if(StringUtils.isNotBlank(oftenStatusActive)){
 			builder.append(" and s.statusCode = '").append(oftenStatusActive).append("'");
 		}
+		builder.append(" order by s.displaySequence");
 		String hql = builder.toString();
 		List<SysFunc> funList = (List<SysFunc>) super.find(hql);
 		return funList;

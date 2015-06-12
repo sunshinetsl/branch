@@ -9,5 +9,5 @@ public class FunctionConstants {
 	public final static String OFTEN_STATUS_ACTIVE = "ACTIVE";
 	
 	//取消状态
-	public final static String OFTEN_STATUS_CANCELED = "CANCELEDs";
+	public final static String OFTEN_STATUS_CANCELED = "CANCELED";
 }

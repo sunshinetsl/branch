@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dragon.common.BasicContorller;
 import com.dragon.common.util.FunctionConstants;
 import com.dragon.entity.SysFunc;
+import com.dragon.service.func.SysDictService;
 import com.dragon.service.func.SysFuncService;
 
 /**
@@ -28,6 +29,9 @@ public class SysFuncController extends BasicContorller{
 	
 	@Autowired
 	private SysFuncService sysFuncService;
+	
+	@Autowired
+	private SysDictService sysDictService;
 	
 	/**
 	 * 取菜单
