@@ -1,29 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title></title>
-</head>
-<body>
-	<div class="header_bg">
-		<div class="wrap">
-			<div class="header">
-				<div class="logo">
-					<a href="home/show"><img
-						src="${ctx}/plugins/images/logo.png" alt="" /> </a>
-				</div>
-				<div class="social-icons">
-					<ul>
-						<li><sec:authentication property="name"/></li>
-						<li><a href="${ctx}/account/regPage.html" target="_blank" style="color:white;">注册</a></li>
-						<li><a href="${ctx}/account/loginPage.html" target="_blank" style="color:white;">登录</a></li>
-						<li><a href="<c:url value="/j_spring_security_logout" />"> Logout</a></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
+<div class="header_bg">
+	<div class="wrap">
+		<div class="header">
+			<div class="logo">
+				<a href="home/show"><img src="${ctx}/plugins/images/logo.png"
+					alt="" /> </a>
 			</div>
+			<div class="social-icons">
+				<ul>
+					<!-- <li><sec:authentication property="name"/></li> -->
+					<li><a href="${ctx}/account/regPage.html" target="_blank"
+						style="color: white;">注册</a></li>
+					<li><a href="${ctx}/account/loginPage.html" target="_blank"
+						style="color: white;">登录</a></li>
+					<li><a href="<c:url value="/j_spring_security_logout" />">
+							Logout</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
-</body>
-</html>
+</div>

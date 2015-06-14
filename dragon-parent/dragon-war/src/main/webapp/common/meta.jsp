@@ -18,6 +18,15 @@
 <script type="text/javascript" src="<%=ctx%>/plugins/js/move-top.js"></script>
 <script type="text/javascript" src="<%=ctx%>/plugins/js/easing.js"></script>
 
+<!-- 引用控制层插件样式 -->
+<link rel="stylesheet" href="<%=ctx %>/plugins/control/css/zyUpload.css" type="text/css">
+<!-- 引用核心层插件 -->
+<script src="<%=ctx %>/plugins/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script src="<%=ctx %>/plugins/control/js/zyUpload.js"></script>
+<!-- 引用初始化JS -->
+<script src="<%=ctx %>/plugins/core/jq22.js"></script>
+
 <!-- 项目根路径 -->
 <input type="hidden" id="rootPath" value="<%=ctx%>" />
 
