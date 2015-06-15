@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.dragon.dao.community.HomeImpressDAO;
 
 @Service("homeImpressServiceImpl")
-public class HomeImpressServiceImpl implements HomeImpressService{
+public class HomeImpressServiceImpl<T> implements HomeImpressService{
 
 	@Autowired
-	private HomeImpressDAO homeImpressDAO;
+	private HomeImpressDAO<T> homeImpressDAO;
 	
 	private Logger logger = LoggerFactory.getLogger(HomeImpressServiceImpl.class);
 }

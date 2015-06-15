@@ -1,15 +1,10 @@
 package com.dragon.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dragon.common.dao.BaseDAO;
-import com.dragon.common.page.Page;
 import com.dragon.common.page.PageResultSet;
-import com.dragon.common.util.Util;
 import com.dragon.dto.UserModel;
 import com.dragon.entity.Goods;
 import com.dragon.entity.User;
