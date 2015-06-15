@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.dragon.common.page.PageResultSet;
 import com.dragon.dto.UserModel;
-import com.dragon.entity.Goods;
 import com.dragon.entity.User;
 
 
@@ -75,5 +74,4 @@ public interface UserService {
 	 */
 	public PageResultSet<User> findPageUserList(UserModel userModel, int page, int pageSize);
 	
-	public Goods getTest(int id);
 }

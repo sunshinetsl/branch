@@ -2,5 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/common/meta.jsp" %>
 <body>
-<h1 style="text-align:center;">Html5 Upload示例</h1>
+<div>图片地</div>
+<div>主题</div>
+<div>介绍</div>
 <div id="demo" class="demo"></div>

@@ -24,17 +24,17 @@ public class University implements java.io.Serializable {
 	private String universityName;
 	private String collegeName;
 	private String department;
-	private Integer areaId;
+	private String province;
 
 	public University() {
 	}
 
 	public University(String universityName, String collegeName,
-			String department, Integer areaId) {
+			String department, String province) {
 		this.universityName = universityName;
 		this.collegeName = collegeName;
 		this.department = department;
-		this.areaId = areaId;
+		this.province = province;
 	}
 
 	@Id
@@ -75,13 +75,15 @@ public class University implements java.io.Serializable {
 		this.department = department;
 	}
 
-	@Column(name = "area_id")
-	public Integer getAreaId() {
-		return this.areaId;
+	@Column(name = "province", length = 50)
+	public String getProvince() {
+		return province;
 	}
 
-	public void setAreaId(Integer areaId) {
-		this.areaId = areaId;
+	public void setProvince(String province) {
+		this.province = province;
 	}
+
+
 
 }
