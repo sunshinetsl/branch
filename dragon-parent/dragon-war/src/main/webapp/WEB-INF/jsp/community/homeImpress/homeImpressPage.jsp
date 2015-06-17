@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#homeUp').click(function(){
-		window.location.href = $('#rootPath').val()+'/homeImpress/announce.html';
+		window.location.href = $('#rootPath').val()+'/homeImpress/announcePage.html';
 	});
 });
 </script>
