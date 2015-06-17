@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dragon-war:war">
+    <output-path>$PROJECT_DIR$/dragon-parent/dragon-war/target</output-path>
+    <root id="archive" name="dragon.war">
+      <element id="artifact" artifact-name="dragon-war:war exploded" />
+    </root>
+  </artifact>
+</component>
