@@ -64,7 +64,7 @@ public class HomeImpressController extends BasicContorller{
 	 * @return
 	 */
 	@RequestMapping("/announce")
-	public ModelAndView announce(){
+	public ModelAndView announce(@RequestParam("theme") String theme, @RequestParam("content") String content, @RequestParam("areaId") String areaId){
 		if(logger.isDebugEnabled()){
 			logger.debug("announce -->start");
 		}
