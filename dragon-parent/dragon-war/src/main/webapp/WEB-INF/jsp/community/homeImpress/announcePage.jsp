@@ -83,8 +83,9 @@
 		<div>
 			<select id="district">区</select>
 		</div>
-		<div>主题</div>
+		<div><input type="text" id="aaa" name="" value="">主题</div>
 		<div>介绍</div>
+		<textarea rows="" cols="" id="" name=""></textarea>
 		<div id="demo" class="demo"></div>
 	</form>
 </body>

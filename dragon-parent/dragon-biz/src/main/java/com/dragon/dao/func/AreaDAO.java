@@ -24,7 +24,6 @@ public class AreaDAO<T> extends BaseDAO<T>{
 	 * @param area
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public long insertArea(Area area) {
 		long count = 0;
 		try {
