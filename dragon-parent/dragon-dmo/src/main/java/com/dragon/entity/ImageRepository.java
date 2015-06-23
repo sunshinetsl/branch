@@ -12,6 +12,7 @@ public class ImageRepository {
     private String imgType;
     private Integer sourceId;
     private String imageAddress;
+    private String smallImageAddress;
 
     @Id
     @Column(name = "id")
@@ -53,18 +54,25 @@ public class ImageRepository {
         this.imageAddress = imageAddress;
     }
 
+    public String getSmallImageAddress() {
+        return smallImageAddress;
+    }
+
+    @Basic
+    @Column(name = "small_image_address")
+    public void setSmallImageAddress(String smallImageAddress) {
+        this.smallImageAddress = smallImageAddress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ImageRepository that = (ImageRepository) o;
-
         if (id != that.id) return false;
         if (imgType != null ? !imgType.equals(that.imgType) : that.imgType != null) return false;
         if (sourceId != null ? !sourceId.equals(that.sourceId) : that.sourceId != null) return false;
         if (imageAddress != null ? !imageAddress.equals(that.imageAddress) : that.imageAddress != null) return false;
-
         return true;
     }
 

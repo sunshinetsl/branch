@@ -24,8 +24,6 @@
 <script src="<%=ctx %>/plugins/core/zyFile.js"></script>
 <!-- 引用控制层插件 -->
 <script src="<%=ctx %>/plugins/control/js/zyUpload.js"></script>
-<!-- 引用初始化JS -->
-<script src="<%=ctx %>/plugins/core/jq22.js"></script>
 
 <!-- 项目根路径 -->
 <input type="hidden" id="rootPath" value="<%=ctx%>" />

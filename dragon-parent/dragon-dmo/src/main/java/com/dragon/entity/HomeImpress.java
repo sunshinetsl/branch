@@ -2,6 +2,9 @@ package com.dragon.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Created by Administrator on 2015/6/18 0018.
@@ -14,14 +17,15 @@ public class HomeImpress {
     private String theme;
     private String content;
     private String areaId;
-    private Timestamp createTime;
-    private String updateTime;
+    private Date createTime;
+    private Date updateTime;
     private String statusCode;
     private String clickCount;
     private String commentCount;
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -72,21 +76,21 @@ public class HomeImpress {
 
     @Basic
     @Column(name = "create_time")
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     @Basic
     @Column(name = "update_time")
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

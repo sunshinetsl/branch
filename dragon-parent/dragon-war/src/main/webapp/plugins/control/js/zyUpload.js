@@ -20,9 +20,9 @@
 					height           : "400px",  					// 宽度
 					itemWidth        : "140px",                     // 文件项的宽度
 					itemHeight       : "120px",                     // 文件项的高度
-					url              : "/upload/UploadAction",  	// 上传文件的路径
+					url              : "/homeImpress/upload",  	// 上传文件的路径
 					multiple         : true,  						// 是否可以多个文件上传
-					dragDrop         : true,  						// 是否可以拖动上传文件
+					dragDrop         : false,  						// 是否可以拖动上传文件
 					del              : true,  						// 是否可以删除文件
 					finishDel        : false,  						// 是否在上传文件完成后删除预览
 					/* 提供给外部的接口方法 */
@@ -59,7 +59,7 @@
 	            	html += '				<div class="convent_choice">';
 	            	html += '					<div class="andArea">';
 	            	html += '						<div class="filePicker">点击选择文件</div>';
-	            	html += '						<input id="fileImage" type="file" size="30" name="fileselect[]" '+multiple+'>';
+	            	html += '						<input id="fileImage" type="file" size="30" name="fileList" '+multiple+'>';
 	            	html += '					</div>';
 	            	html += '				</div>';
 					html += '				<span id="fileDragArea" class="upload_drag_area">或者将文件拖到此处</span>';

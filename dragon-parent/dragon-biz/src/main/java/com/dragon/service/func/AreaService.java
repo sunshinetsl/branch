@@ -1,5 +1,6 @@
 package com.dragon.service.func;
 
+import com.dragon.entity.HomeImpress;
 import org.springframework.stereotype.Service;
 
 import com.dragon.entity.Area;
@@ -16,4 +17,8 @@ public interface AreaService {
 	List<Area> getCityByProvince(String province, String oftenStatusActive);
 
 	List<Area> getDistrict(String province, String city, String oftenStatusActive);
+
+	List<Area> getCityByProvinceId(Integer provinceId);
+
+	Area queryAreaById(String areaId);
 }

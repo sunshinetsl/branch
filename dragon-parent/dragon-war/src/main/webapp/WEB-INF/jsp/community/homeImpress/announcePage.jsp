@@ -4,6 +4,8 @@
 <html>
 <%@ include file="/common/meta.jsp" %>
 <body>
+<!-- 引用初始化JS -->
+<script src="<%=ctx %>/plugins/core/homeImpressUpload.js"></script>
 <script type="application/javascript">
 	$(document).ready(function(){
 		getCity();
@@ -62,14 +64,14 @@
 			success : function(data) {
 				var str = '';
 				for(var i = 0; i < data.district.length; i++){
-					str += '<option id='+data.district[i].id+' value='+data.district[i].district+'>'+data.district[i].district+'</option>';
+					str += '<option id='+data.district[i].id+' value='+data.district[i].id+'>'+data.district[i].district+'</option>';
 				}
 				$('#district').html(str);
 			}
 		});
 	}
 </script>
-	<form id="impressForm" method="post" action="${ctx}/homeImpress/announce.html">
+	<form id="impressForm" method="post" action="${ctx}/homeImpress/announce.html" enctype="multipart/form-data">
 		<div>
 			<select id="province">省
 				<c:forEach items="${province}" var="p">
@@ -81,12 +83,13 @@
 			<select id="city">市</select>
 		</div>
 		<div>
-			<select id="district" name="district">区</select>
+			<select id="district" name="areaId">区</select>
 		</div>
-		<div><input type="text" id="aaa" name="" value="">主题</div>
+		<div><input type="text" id="theme" name="theme" value="">主题</div>
 		<div>介绍</div>
-		<textarea rows="" cols="" id="" name=""></textarea>
+		<textarea rows="" cols="" id="content" name="content"></textarea>
 		<div id="demo" class="demo"></div>
+		<div><input type="submit" id="sub" value="提交"></div>
 	</form>
 </body>
 </html>

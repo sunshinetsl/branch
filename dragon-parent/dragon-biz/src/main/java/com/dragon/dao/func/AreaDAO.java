@@ -1,11 +1,14 @@
 package com.dragon.dao.func;
 
+import com.dragon.common.util.FunctionConstants;
+import com.dragon.entity.HomeImpress;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.dragon.common.dao.BaseDAO;
 import com.dragon.entity.Area;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -105,5 +108,35 @@ public class AreaDAO<T> extends BaseDAO<T>{
 		String hql = buffer.toString();
 		List<Area> areaList = (List<Area>) super.find(hql,params);
 		return areaList;
+	}
+
+	/**
+	 * 根据ID查询市
+	 * @param provinceId
+	 * @return
+	 */
+	public List<Area> getCityByProvinceId(Integer provinceId) {
+		StringBuffer buffer = new StringBuffer();
+		List<Object> params = new ArrayList<Object>();
+		buffer.append("from Area a where 1=1 ");
+		if(null != provinceId && 0 != provinceId){
+			buffer.append(" and id = ?");
+			params.add(provinceId);
+		}
+		buffer.append(" and a.statusCode = ?");
+		params.add(FunctionConstants.OFTEN_STATUS_ACTIVE);
+		String hql = buffer.toString();
+		List<Area> areaList = (List<Area>) super.find(hql,params);
+		return areaList;
+	}
+
+	/**
+	 * 根据ID查询
+	 * @param areaId
+	 * @return
+	 */
+	public Area queryAreaById(String areaId) {
+		Area area = (Area) super.get((Class<T>) Area.class, areaId);
+		return area;
 	}
 }

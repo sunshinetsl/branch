@@ -30,7 +30,7 @@ public class BaseDAO<T> {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public int save(T o) throws Exception{
+	public Integer save(T o) throws Exception{
 		return (Integer) this.getCurrentSession().save(o);
 	}
 
