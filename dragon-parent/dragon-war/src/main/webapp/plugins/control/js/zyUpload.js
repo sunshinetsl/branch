@@ -52,7 +52,7 @@
 				
 				if(para.dragDrop){
 					// 创建带有拖动的html
-					html += '<form id="uploadForm" action="'+para.url+'" method="post" enctype="multipart/form-data">';
+					//html += '<form id="uploadForm" action="'+para.url+'" method="post" enctype="multipart/form-data">';
 					html += '	<div class="upload_box">';
 					html += '		<div class="upload_main">';
 					html += '			<div class="upload_choose">';
@@ -78,7 +78,7 @@
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
 					html += '	</div>';
-					html += '</form>';
+					//html += '</form>';
 				}else{
 					var imgWidth = parseInt(para.itemWidth.replace("px", ""))-15;
 					

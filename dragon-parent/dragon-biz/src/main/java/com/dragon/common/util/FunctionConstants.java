@@ -10,4 +10,16 @@ public class FunctionConstants {
 	
 	//取消状态
 	public final static String OFTEN_STATUS_CANCELED = "CANCELED";
+
+	public final static String NARMAL_FILE_PATH;
+
+	public final static String SMALL_FILE_PATH;
+
+	public final static String HOME_IMPRESS = "IMPRESS";
+
+	static{
+		Configuration cfg = Configuration.getInstance("constant");
+		NARMAL_FILE_PATH = cfg.getValue("normalFilePath");
+		SMALL_FILE_PATH = cfg.getValue("smallFilePath");
+	}
 }
