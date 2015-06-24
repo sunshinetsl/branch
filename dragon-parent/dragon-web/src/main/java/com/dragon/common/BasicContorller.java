@@ -21,6 +21,7 @@ import com.google.gson.Gson;
  * 
  * 2015-5-8
  */
+@SuppressWarnings("ALL")
 @Controller
 public class BasicContorller {
 

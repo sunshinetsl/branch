@@ -1,16 +1,26 @@
 package com.dragon.common.util;
 
+import com.dragon.bean.UserSessionInfo;
+import com.dragon.entity.ImageRepository;
 import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.List;
 
 /**
  * 通用工具类
@@ -147,60 +157,96 @@ public class Util {
 		return suffix;
 	}
 
-	// 生成缩略图，原图路径，生成图片路径，宽高
-	public static void reduceImage(String imgsrc, String imgdist, int widthdist,
-								   int heightdist) throws Exception {
-		FileOutputStream out = null;
+	/**
+	 * 上传文件
+	 * @return
+	 */
+	public static String[][] upload(String nPath, String sPath, UserSessionInfo userInfo, HttpServletRequest request){
+		String[][] reback = null;
+		boolean flag = false;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = format.format(new Date());
+		//替换文件来源
+		String narmalPath = nPath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",userInfo.getUserId().toString());
+		String smallPath = sPath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",userInfo.getUserId().toString());
 		try {
-			File srcfile = new File(imgsrc);
-			if (!srcfile.exists()) {
-				throw new Exception("文件不存在！");
-				// return;//修改后，保证回滚
-			}
-			BufferedImage src = ImageIO.read(srcfile);
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+                    request.getSession().getServletContext());
+			if (multipartResolver.isMultipart(request)) {
+                MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 
-			int sw = src.getWidth();
-			int sh = src.getHeight();
-
-			int tw = widthdist, th = heightdist;
-			int x = 0, y = 0;
-
-			double sx = (double) widthdist / sw;
-			double sy = (double) heightdist / sh;
-			if (sx < sy) {
-				tw = (int) (sy * sw);
-				x = (tw - widthdist) / 2;
-			} else {
-				th = (int) (sx * sh);
-				y = (th - heightdist) / 2;
-			}
-
-			BufferedImage tag = new BufferedImage((int) tw, (int) th,
-					BufferedImage.TYPE_INT_RGB);
-
-			tag.getGraphics().drawImage(
-					src.getScaledInstance(tw, th, Image.SCALE_SMOOTH), 0, 0,
-					null);
-			tag.getGraphics().dispose();
-			out = new FileOutputStream(imgdist);
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			encoder.encode(tag.getSubimage(x, y, widthdist, heightdist));
-			out.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			throw new Exception(ex);
-		} finally {
-			if (out != null) {
-				try {
-					out.close();
-					out = null;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
+                List<MultipartFile> fileList = multiRequest.getFiles("fileList");
+				reback = new String[fileList.size()][2];
+				int i = 0;
+                for(MultipartFile file : fileList){
+                    if(file != null){
+                        //保存图片
+                        Random dom = new Random();
+                        //文件名称
+                        long times = System.currentTimeMillis();
+                        long imageName = times + dom.nextInt(1000);
+						flag = Util.SaveFileFromInputStream(file.getInputStream(), narmalPath, imageName, file.getContentType());
+                        if(!flag){
+                            break;
+                        }else{
+                            String newPath = narmalPath + File.separator + imageName + Util.getImageType(file.getContentType());
+                            String smallNewpath = smallPath + File.separator + imageName + Util.getImageType(file.getContentType());
+                            try {
+                                Util.reduceImage(newPath,smallNewpath);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+							reback[i][0] = newPath;
+							reback[i][1] = smallNewpath;
+                        }
+                    }
+					i++;
+                }
+            }
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		return reback;
 	}
+
+	/**
+	 *
+	 * @param inPath
+	 * @param outPath
+	 * @return
+	 */
+	public static String reduceImage(String inPath, String outPath) throws IOException, IllegalFormatException {
+		float times = 0.2f;
+		File file = new File(inPath);
+		if(!file.exists()){
+			return null;
+		}
+		BufferedImage bufferImage = ImageIO.read(file);
+		 /*原始图像的宽度和高度*/
+		int width = bufferImage.getWidth();
+		int height = bufferImage.getHeight();
+
+        /*调整后的图片的宽度和高度*/
+		int toWidth = (int) (Float.parseFloat(String.valueOf(width)) * times);
+		int toHeight = (int) (Float.parseFloat(String.valueOf(height)) * times);
+
+        /*新生成结果图片*/
+		BufferedImage result = new BufferedImage(toWidth, toHeight, BufferedImage.TYPE_INT_RGB);
+
+		result.getGraphics().drawImage(bufferImage.getScaledInstance(toWidth, toHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
+
+		 /*输出到文件流*/
+		FileOutputStream newimage = new FileOutputStream(outPath);
+		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newimage);
+		JPEGEncodeParam jep = JPEGCodec.getDefaultJPEGEncodeParam(result);
+            /* 压缩质量 */
+		jep.setQuality(1f, true);
+		encoder.encode(result, jep);
+           /*近JPEG编码*/
+		newimage.close();
+		return null;
+	}
+
 
 	public static void main(String[] args) {
 		System.out.println(Util.encryptMD5("admin"));

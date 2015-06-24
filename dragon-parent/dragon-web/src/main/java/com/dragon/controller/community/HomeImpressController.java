@@ -1,5 +1,6 @@
 package com.dragon.controller.community;
 
+import com.dragon.bean.UserSessionInfo;
 import com.dragon.common.util.FunctionConstants;
 import com.dragon.common.util.Util;
 import com.dragon.entity.HomeImpress;
@@ -97,62 +98,24 @@ public class HomeImpressController extends BasicContorller{
 		int count = homeImpressService.saveHomeImpress(homeImpress);
 		//保存图片表
 		if(count > 0){
-			try {
-				//文件存储地址
-				String narmalFilePath = FunctionConstants.NARMAL_FILE_PATH;
-				String smallFilePath = FunctionConstants.SMALL_FILE_PATH;
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				String dateStr = format.format(new Date());
-				//替换文件来源
-				String narmalPath = narmalFilePath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",super.getSessionUserInfo().getUserId().toString());
-				String smallPath = smallFilePath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",super.getSessionUserInfo().getUserId().toString());
-				CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-                        request.getSession().getServletContext());
-				if (multipartResolver.isMultipart(request)) {
-                    MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-
-					List<MultipartFile> fileList = multiRequest.getFiles("fileList");
-					for(MultipartFile file : fileList){
-						if(file != null){
-							//保存图片
-							Random dom = new Random();
-							//文件名称
-							long times = System.currentTimeMillis();
-							long imageName = times + dom.nextInt(1000);
-							boolean flag = Util.SaveFileFromInputStream(file.getInputStream(), narmalPath, imageName, file.getContentType());
-							if(!flag){
-								break;
-							}else{
-
-								String newPath = narmalPath + File.separator + imageName + Util.getImageType(file.getContentType());
-								String smallNewpath = smallPath + File.separator + imageName + Util.getImageType(file.getContentType());
-								BufferedImage bufferedImage = ImageIO.read(new File(newPath));
-								try {
-									Util.reduceImage(newPath,smallNewpath,
-											(int) (bufferedImage.getWidth() * 1),
-											(int) (bufferedImage.getHeight() * 1));
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								//保存图片表数据
-								ImageRepository repository = new ImageRepository();
-								repository.setImgType(FunctionConstants.HOME_IMPRESS);
-								repository.setImageAddress(path + File.separator + imageName);
-								repository.setSourceId(count);
-								repository.setSmallImageAddress(smallPath + File.separator + imageName);
-								int i = imageRepositoryService.saveImages(repository);
-								if(i <= 0){
-									throw new IllegalArgumentException("保存图片异常");
-								}
-							}
-						}
-					}
-                }
-			} catch (IOException e) {
-				e.printStackTrace();
+			//文件存储地址
+			String narmalFilePath = FunctionConstants.NARMAL_FILE_PATH;
+			String smallFilePath = FunctionConstants.SMALL_FILE_PATH;
+			String[][] reback = Util.upload(narmalFilePath, smallFilePath, super.getSessionUserInfo(), request);
+			for(int i = 0; i < reback.length; i++){
+				//保存图片表数据
+				ImageRepository repository = new ImageRepository();
+				repository.setImgType(FunctionConstants.HOME_IMPRESS);
+				repository.setImageAddress(reback[i][0]);
+				repository.setSourceId(count);
+				repository.setSmallImageAddress(reback[i][1]);
+				int j = imageRepositoryService.saveImages(repository);
+				if(j <= 0){
+					throw new IllegalArgumentException("保存图片异常");
+				}
 			}
-		}
 
+		}
 		ModelAndView model = new ModelAndView();
 		model.setViewName("/homeImpress/announcePage");
 		return model;

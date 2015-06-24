@@ -2,6 +2,8 @@ package com.dragon.entity;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Created by Administrator on 2015/6/18 0018.
  */
@@ -15,7 +17,8 @@ public class ImageRepository {
     private String smallImageAddress;
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -54,12 +57,12 @@ public class ImageRepository {
         this.imageAddress = imageAddress;
     }
 
+    @Basic
+    @Column(name = "small_image_address")
     public String getSmallImageAddress() {
         return smallImageAddress;
     }
 
-    @Basic
-    @Column(name = "small_image_address")
     public void setSmallImageAddress(String smallImageAddress) {
         this.smallImageAddress = smallImageAddress;
     }
