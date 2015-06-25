@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="<%=ctx%>/plugins/css/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="<%=ctx%>/plugins/css/slider.css" />
 
-<script type="text/javascript" src="<%=ctx%>/plugins/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<%=ctx%>/plugins/js/jquery-1.10.2.mini.js"></script>
 <script type="text/javascript" src="<%=ctx%>/plugins/js/modernizr.custom.28468.js"></script>
 <script type="text/javascript" src="<%=ctx%>/plugins/js/jquery.cslider.js"></script>
 <script type="text/javascript" src="<%=ctx%>/plugins/js/move-top.js"></script>
@@ -21,7 +21,7 @@
 <!-- 引用控制层插件样式 -->
 <link rel="stylesheet" href="<%=ctx %>/plugins/control/css/zyUpload.css" type="text/css">
 <!-- 引用核心层插件 -->
-<script src="<%=ctx %>/plugins/core/zyFile.js"></script>
+<script src="<%=ctx %>/plugins/control/js/zyFile.js"></script>
 <!-- 引用控制层插件 -->
 <script src="<%=ctx %>/plugins/control/js/zyUpload.js"></script>
 

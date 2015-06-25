@@ -14,8 +14,8 @@
 						style="color: white;">注册</a></li>
 					<li><a href="${ctx}/account/loginPage.html" target="_blank"
 						style="color: white;">登录</a></li>
-					<li><a href="<c:url value="/j_spring_security_logout" />">
-							Logout</a></li>
+					<%--<li><a href="<c:url value="/j_spring_security_logout" />">
+							Logout</a></li>--%>
 				</ul>
 			</div>
 			<div class="clear"></div>
