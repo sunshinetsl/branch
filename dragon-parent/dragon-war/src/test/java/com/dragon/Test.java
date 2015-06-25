@@ -17,20 +17,20 @@ import java.util.Map;
 public class Test {
 
     /**
-     * @param im            Ô­Ê¼Í¼Ïñ
-     * @param resizeTimes   ĞèÒªËõĞ¡µÄ±¶Êı£¬ËõĞ¡2±¶ÎªÔ­À´µÄ1/2 £¬Õâ¸öÊıÖµÔ½´ó£¬·µ»ØµÄÍ¼Æ¬Ô½Ğ¡
-     * @return              ·µ»Ø´¦ÀíºóµÄÍ¼Ïñ
+     * @param im            åŸå§‹å›¾åƒ
+     * @param resizeTimes   éœ€è¦ç¼©å°çš„å€æ•°ï¼Œç¼©å°2å€ä¸ºåŸæ¥çš„1/2 ï¼Œè¿™ä¸ªæ•°å€¼è¶Šå¤§ï¼Œè¿”å›çš„å›¾ç‰‡è¶Šå°
+     * @return              è¿”å›å¤„ç†åçš„å›¾åƒ
      */
     public BufferedImage resizeImage(BufferedImage im, float resizeTimes) {
-        /*Ô­Ê¼Í¼ÏñµÄ¿í¶ÈºÍ¸ß¶È*/
+        /*åŸå§‹å›¾åƒçš„å®½åº¦å’Œé«˜åº¦*/
         int width = im.getWidth();
         int height = im.getHeight();
 
-        /*µ÷ÕûºóµÄÍ¼Æ¬µÄ¿í¶ÈºÍ¸ß¶È*/
+        /*è°ƒæ•´åçš„å›¾ç‰‡çš„å®½åº¦å’Œé«˜åº¦*/
         int toWidth = (int) (Float.parseFloat(String.valueOf(width)) / resizeTimes);
         int toHeight = (int) (Float.parseFloat(String.valueOf(height)) / resizeTimes);
 
-        /*ĞÂÉú³É½á¹ûÍ¼Æ¬*/
+        /*æ–°ç”Ÿæˆç»“æœå›¾ç‰‡*/
         BufferedImage result = new BufferedImage(toWidth, toHeight, BufferedImage.TYPE_INT_RGB);
 
         result.getGraphics().drawImage(im.getScaledInstance(toWidth, toHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
@@ -38,20 +38,20 @@ public class Test {
     }
 
     /**
-     * @param im            Ô­Ê¼Í¼Ïñ
-     * @param resizeTimes   ±¶Êı,±ÈÈç0.5¾ÍÊÇËõĞ¡Ò»°ë,0.98µÈµÈdoubleÀàĞÍ
-     * @return              ·µ»Ø´¦ÀíºóµÄÍ¼Ïñ
+     * @param im            åŸå§‹å›¾åƒ
+     * @param resizeTimes   å€æ•°,æ¯”å¦‚0.5å°±æ˜¯ç¼©å°ä¸€åŠ,0.98ç­‰ç­‰doubleç±»å‹
+     * @return              è¿”å›å¤„ç†åçš„å›¾åƒ
      */
     public BufferedImage zoomImage(BufferedImage im, float resizeTimes) {
-        /*Ô­Ê¼Í¼ÏñµÄ¿í¶ÈºÍ¸ß¶È*/
+        /*åŸå§‹å›¾åƒçš„å®½åº¦å’Œé«˜åº¦*/
         int width = im.getWidth();
         int height = im.getHeight();
 
-        /*µ÷ÕûºóµÄÍ¼Æ¬µÄ¿í¶ÈºÍ¸ß¶È*/
+        /*è°ƒæ•´åçš„å›¾ç‰‡çš„å®½åº¦å’Œé«˜åº¦*/
         int toWidth = (int) (Float.parseFloat(String.valueOf(width)) * resizeTimes);
         int toHeight = (int) (Float.parseFloat(String.valueOf(height)) * resizeTimes);
 
-        /*ĞÂÉú³É½á¹ûÍ¼Æ¬*/
+        /*æ–°ç”Ÿæˆç»“æœå›¾ç‰‡*/
         BufferedImage result = new BufferedImage(toWidth, toHeight, BufferedImage.TYPE_INT_RGB);
 
         result.getGraphics().drawImage(im.getScaledInstance(toWidth, toHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
@@ -59,7 +59,7 @@ public class Test {
     }
 
     /**
-     * @param path  Òª×ª»¯µÄÍ¼ÏñµÄÎÄ¼ş¼Ğ,¾ÍÊÇ´æ·ÅÍ¼ÏñµÄÎÄ¼ş¼ĞÂ·¾¶
+     * @param path  è¦è½¬åŒ–çš„å›¾åƒçš„æ–‡ä»¶å¤¹,å°±æ˜¯å­˜æ”¾å›¾åƒçš„æ–‡ä»¶å¤¹è·¯å¾„
      * @return
      */
     public BufferedImage getImageList(String path) throws IOException {
@@ -71,10 +71,10 @@ public class Test {
     }
 
     /**
-     * °ÑÍ¼Æ¬Ğ´µ½´ÅÅÌÉÏ
+     * æŠŠå›¾ç‰‡å†™åˆ°ç£ç›˜ä¸Š
      * @param im
-     * @param path     eg: C://home// Í¼Æ¬Ğ´ÈëµÄÎÄ¼ş¼ĞµØÖ·
-     * @param fileName DCM1987.jpg  Ğ´ÈëÍ¼Æ¬µÄÃû×Ö
+     * @param path     eg: C://home// å›¾ç‰‡å†™å…¥çš„æ–‡ä»¶å¤¹åœ°å€
+     * @param fileName DCM1987.jpg  å†™å…¥å›¾ç‰‡çš„åå­—
      * @return
      */
     public boolean writeToDisk(BufferedImage im, String path, String fileName) {
@@ -93,14 +93,14 @@ public class Test {
 
     public boolean writeHighQuality(BufferedImage im, String fileFullPath) {
         try {
-            /*Êä³öµ½ÎÄ¼şÁ÷*/
+            /*è¾“å‡ºåˆ°æ–‡ä»¶æµ*/
             FileOutputStream newimage = new FileOutputStream(fileFullPath);
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newimage);
             JPEGEncodeParam jep = JPEGCodec.getDefaultJPEGEncodeParam(im);
-            /* Ñ¹ËõÖÊÁ¿ */
+            /* å‹ç¼©è´¨é‡ */
             jep.setQuality(1f, true);
             encoder.encode(im, jep);
-           /*½üJPEG±àÂë*/
+           /*è¿‘JPEGç¼–ç */
             newimage.close();
             return true;
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class Test {
     }
 
     /**
-     * ·µ»ØÎÄ¼şµÄÎÄ¼şºó×ºÃû
+     * è¿”å›æ–‡ä»¶çš„æ–‡ä»¶åç¼€å
      * @param fileName
      * @return
      */
@@ -124,11 +124,11 @@ public class Test {
     public static void main(String[] args) throws Exception{
 
         String inputFoler = "F:\\dragon-images\\normal\\homeImpress\\2015-06-24\\10\\1435134819194.jpg" ;
-         /*Õâ¶ùÌîĞ´Äã´æ·ÅÒªËõĞ¡Í¼Æ¬µÄÎÄ¼ş¼ĞÈ«µØÖ·*/
+         /*è¿™å„¿å¡«å†™ä½ å­˜æ”¾è¦ç¼©å°å›¾ç‰‡çš„æ–‡ä»¶å¤¹å…¨åœ°å€*/
         String outputFolder = "F:\\dragon-images\\small\\homeImpress\\2015-06-24\\10\\1435134819194.jpg";
-        /*Õâ¶ùÌîĞ´Äã×ª»¯ºóµÄÍ¼Æ¬´æ·ÅµÄÎÄ¼ş¼Ğ*/
+        /*è¿™å„¿å¡«å†™ä½ è½¬åŒ–åçš„å›¾ç‰‡å­˜æ”¾çš„æ–‡ä»¶å¤¹*/
         float times = 0.2f;
-        /*Õâ¸ö²ÎÊıÊÇÒª×ª»¯³ÉµÄ±¶Êı,Èç¹ûÊÇ1¾ÍÊÇ×ª»¯³É1±¶*/
+        /*è¿™ä¸ªå‚æ•°æ˜¯è¦è½¬åŒ–æˆçš„å€æ•°,å¦‚æœæ˜¯1å°±æ˜¯è½¬åŒ–æˆ1å€*/
 
 
         Test r = new Test();

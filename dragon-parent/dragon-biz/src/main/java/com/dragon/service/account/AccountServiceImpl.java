@@ -26,7 +26,7 @@ public class AccountServiceImpl<T> implements AccountService{
 	private AccountDAO<T> accountDAO;
 	
 	/**
-	 * 
+	 * 检查账号
 	 */
 	public int checkAccount(String account) {
 		if(logger.isDebugEnabled()){
@@ -41,7 +41,7 @@ public class AccountServiceImpl<T> implements AccountService{
 	}
 
 	/**
-	 * 
+	 * 保存
 	 */
 	public int saveRegAccount(String account, String passWord) {
 		int sign = 0;
