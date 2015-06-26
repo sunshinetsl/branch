@@ -1,5 +1,6 @@
 package com.dragon.controller.security;
 
+import com.dragon.bean.UserSessionInfo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import com.dragon.common.BasicContorller;
 import com.dragon.dto.MessageDTO;
 import com.dragon.entity.UserInfo;
 import com.dragon.service.account.AccountService;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 账号管理
@@ -35,18 +37,20 @@ public class AccountController extends BasicContorller{
 	private MessageDTO msg = new MessageDTO();
 	
 	private ModelMap model = new ModelMap();
+
+
 	/**
-	 * 注册页面
+	 * 登陆页面
 	 * @return
 	 */
-	@RequestMapping("/regPage")
-	public String regPage(){
-		if(logger.isDebugEnabled()){
-			logger.debug("regPage -->start");
-		}
-		return "account/regPage";
+	@RequestMapping("/loginPage")
+	public ModelAndView loginPage(){
+		logger.debug("进入登录页面 -->start");
+		return new ModelAndView("/account/loginPage");
 	}
-	
+
+
+
 	/**
 	 * 注册
 	 * @return
@@ -84,38 +88,27 @@ public class AccountController extends BasicContorller{
 		}
 		return model;
 	}
-	
-	/**
-	 * 登录页面
-	 * @return
-	 */
-	@RequestMapping("/loginPage")
-	public String loginPage(){
-		if(logger.isDebugEnabled()){
-			logger.debug("loginPage -->start");
-		}
-		return "account/loginPage";
-	}
+
 	
 	
 	/**
-	 * 登录
-	 * @param account
-	 * @param passWord
+	 * 登录验证
+	 * @param username
+	 * @param password
 	 * @return
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("/check")
 	@ResponseBody
-	public ModelMap login(String account, String passWord){
-		logger.debug("login(account={},passWord={} -->start)",account,passWord);
-		UserInfo user = accountService.queryAccount(account);
+	public ModelMap check(String username, String password){
+		logger.debug("login(account={},passWord={} -->start)",username,password);
+		UserInfo user = accountService.queryAccount(username);
 		if(null == user){
 			msg.setFlag("1");
 			msg.setCause("用户名不存在");
 			model.addAttribute("callBack",msg);
 			return model;
 		}
-		if(!DigestUtils.md5Hex(passWord).equals(user.getPassWord())){
+		if(!DigestUtils.md5Hex(password).equals(user.getPassWord())){
 			msg.setFlag("1");
 			msg.setCause("密码错误");
 			model.addAttribute("callBack",msg);
@@ -124,10 +117,21 @@ public class AccountController extends BasicContorller{
 		msg.setFlag("0");
 		msg.setCause("登录成功");
 		model.addAttribute("callBack",msg);
-		securityUserService.loadUserByUsername(user.getAccount());
+		//securityUserService.loadUserByUsername(user.getAccount());
 		return model;
 	}
-	
+
+	/**
+	 * 登录
+	 * @return
+	 */
+	@RequestMapping("/userLogin")
+	public ModelAndView userLogin(String username, String password){
+		logger.debug("login(account={},passWord={} -->start)",username,password);
+		UserSessionInfo userInfo = (UserSessionInfo)securityUserService.loadUserByUsername(username);
+		return new ModelAndView("redirect:/j_spring_security_check");
+	}
+
 	/**
 	 * 注销登录
 	 * @return

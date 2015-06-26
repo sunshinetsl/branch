@@ -19,12 +19,13 @@
 	<http pattern="/home/show" security="none"/>
 	<http pattern="/homePage.html" security="none"/>
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/homeImpress/**" access="permitAll"/>
-		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
-		
-		<form-login login-page="/account/loginPage" authentication-failure-url="/account/loginPage" default-target-url="/homePage" always-use-default-target="true"/>
-		
-		<logout invalidate-session="true" logout-success-url="/account/logout" logout-url="/homePage" delete-cookies="JSESSIONID"/>
+		<!--<intercept-url pattern="/homeImpress/**" access="permitAll"/>-->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
+		<form-login login-page="/account/loginPage.do" authentication-failure-url="/account/loginPage.do?error=true"
+					default-target-url="/homePage.html"/>
+
+		<!--<logout invalidate-session="true" logout-success-url="/account/logout" logout-url="/homePage"/>-->
 		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
 		<session-management invalid-session-url="/account/logout"/>
 	</http>
@@ -35,7 +36,7 @@
 			<password-encoder ref="passwordEncoder"/>
 		</authentication-provider>
 	</authentication-manager>
-	
+
 	<!-- 对密码进行MD5编码 -->
 	<beans:bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/>
 

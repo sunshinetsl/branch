@@ -63,7 +63,6 @@ public class UserDetailsServiceImpl extends BasicContorller implements UserDetai
 	/**
 	 * 放置session
 	 * @param user
-	 * @param request
 	 */
 	public void setUserSession(UserInfo user) {
 		UserSessionInfo sessionInfo = (UserSessionInfo) super.getRequest().getSession().getAttribute("userSessionInfo");

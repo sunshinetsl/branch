@@ -224,7 +224,6 @@ pre{font-family:'simsun';}
     float: left;
 }
 .file_edit{
-	background: url("../images/edit_white.png") no-repeat scroll 0 0 transparent;
 	width:18px;
 	height:18px;
 	display: inline;
@@ -234,7 +233,6 @@ pre{font-family:'simsun';}
 	margin-top:4px;
 }
 .file_edit:hover{
-	background: url("../images/edit_blue.png") no-repeat scroll 0 0 transparent;
 }
 .file_del{
 	background: url("../images/delete_white.png") no-repeat scroll 0 0 transparent;

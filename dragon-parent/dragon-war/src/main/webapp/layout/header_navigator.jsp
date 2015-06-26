@@ -9,13 +9,10 @@
 			</div>
 			<div class="social-icons">
 				<ul>
-					<!-- <li><sec:authentication property="name"/></li> -->
-					<li><a href="${ctx}/account/regPage.html" target="_blank"
+					<li><a href="${ctx}/account/regPage.html"
 						style="color: white;">注册</a></li>
-					<li><a href="${ctx}/account/loginPage.html" target="_blank"
-						style="color: white;">登录</a></li>
-					<%--<li><a href="<c:url value="/j_spring_security_logout" />">
-							Logout</a></li>--%>
+					<li><a href="${ctx}/account/regPage.html"
+						   style="color: white;">登录</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>

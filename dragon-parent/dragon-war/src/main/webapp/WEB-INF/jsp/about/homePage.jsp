@@ -71,7 +71,7 @@
 				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
 			</div>
 			<div class="grid1_of_3">
-				<img src="<%=ctx%>/plugins/images/icon3.png" alt=""/>
+				<img src="<%=ctx%>/plugins/images/icon" alt=""/>
 				<h3><a href="#">Lorem Ipsum is <span> simply </span> </a></h3>
 				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
 			</div>

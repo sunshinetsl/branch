@@ -4,6 +4,7 @@
 		<pattern>*</pattern>
 	</decorator>
 	<!-- 单独排除渲染的页面 -->
-<!-- 	<excludes>
-	</excludes> -->
+ 	<excludes>
+		<pattern>/account/loginPage.do</pattern>
+	</excludes>
 </decorators>
