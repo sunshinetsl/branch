@@ -57,6 +57,8 @@ public class UserDetailsServiceImpl extends BasicContorller implements UserDetai
 		SecurityContext context = new SecurityContextImpl();
 		context.setAuthentication(authentication);
 		SecurityContextHolder.setContext(context);
+		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.print(obj);
 		return super.getSessionUserInfo();
 	}
 	

@@ -15,10 +15,10 @@
 	<h1>用 户 登 录</h1>
 	<form action="${ctx}/j_spring_security_check" method="post" id="loginForm">
 		<div>
-			<input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
+			<input type="text" name="j_username" class="username" placeholder="用户名" autocomplete="off"/>
 		</div>
 		<div>
-			<input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="j_password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
 		<button id="sub" type="button">登录</button>
 	</form>

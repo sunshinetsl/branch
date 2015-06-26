@@ -129,7 +129,7 @@ public class AccountController extends BasicContorller{
 	public ModelAndView userLogin(String username, String password){
 		logger.debug("login(account={},passWord={} -->start)",username,password);
 		UserSessionInfo userInfo = (UserSessionInfo)securityUserService.loadUserByUsername(username);
-		return new ModelAndView("redirect:/j_spring_security_check");
+		return new ModelAndView("redirect:/homePage.html");
 	}
 
 	/**
