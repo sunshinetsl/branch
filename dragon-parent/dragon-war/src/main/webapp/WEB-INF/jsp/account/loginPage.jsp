@@ -20,6 +20,10 @@
 		<div>
 			<input type="password" name="j_password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
+		<div>
+			<input type="text" name="captcha" class="captcha" placeholder="验证码" oncontextmenu="return false" onpaste="return false" style="width: 120px;float: left;"/>
+			<img class="capimg" id="reg_captcha" src="${ctx}/kaptcha.jpg" style="width:150px;margin: 28px auto 0 auto;">
+		</div>
 		<button id="sub" type="button">登录</button>
 	</form>
 	<div class="connect">
@@ -37,8 +41,19 @@
 	$("#sub").live('click',function(){
 		var username = $(".username").val();
 		var password = $(".password").val();
+		var captcha = $('.captcha').val();
 		if(username == '' || password == ''){
 			jError('用户名或密码不能空着！',{
+				autoHide : true,
+				TimeShown : 1000,
+				HorizontalPosition : 'center',
+				VerticalPosition : 'center',
+				ShowOverlay : false
+			});
+			return;
+		}
+		if(captcha == ''){
+			jError('请输入验证码！',{
 				autoHide : true,
 				TimeShown : 1000,
 				HorizontalPosition : 'center',
@@ -55,12 +70,20 @@
 			async : false,
 			dataType : "json",
 			data:{
-				username:username,
-				password:password
+				username : username,
+				password : password,
+				captcha  : captcha
 			},
 			success : function(data) {
 				if(data.callBack.flag == '1'){
-					alert(data.callBack.cause);
+					jError(''+data.callBack.cause+'！',{
+						autoHide : true,
+						TimeShown : 1000,
+						HorizontalPosition : 'center',
+						VerticalPosition : 'center',
+						ShowOverlay : false
+					});
+					return;
 				}else{
 					jSuccess('登录成功',{
 						autoHide : true,

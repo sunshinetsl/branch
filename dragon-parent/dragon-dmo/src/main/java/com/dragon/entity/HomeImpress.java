@@ -26,6 +26,8 @@ public class HomeImpress {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
+    @OneToMany(mappedBy = "role")
+    @JoinColumn(name="source_id")
     public int getId() {
         return id;
     }

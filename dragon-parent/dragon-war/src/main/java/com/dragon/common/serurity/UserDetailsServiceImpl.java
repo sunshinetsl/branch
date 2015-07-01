@@ -53,13 +53,13 @@ public class UserDetailsServiceImpl extends BasicContorller implements UserDetai
 		// Spring Security授权
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(1);
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAccount(), user.getPassWord(), authorities);
-		SecurityContext context = new SecurityContextImpl();
-		context.setAuthentication(authentication);
-		SecurityContextHolder.setContext(context);
-		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.print(obj);
-		return super.getSessionUserInfo();
+//		Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAccount(), user.getPassWord(), authorities);
+//		SecurityContext context = new SecurityContextImpl();
+//		context.setAuthentication(authentication);
+//		SecurityContextHolder.setContext(context);
+
+		UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getAccount(),user.getPassWord(),authorities);
+		return userDetails;
 	}
 	
 	/**

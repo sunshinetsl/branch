@@ -190,14 +190,14 @@ public class Util {
                             break;
                         }else{
                             String newPath = narmalPath + File.separator + imageName + Util.getImageType(file.getContentType());
-                            String smallNewpath = smallPath + File.separator + imageName + Util.getImageType(file.getContentType());
+                            String smallNewPath = smallPath + File.separator + imageName + Util.getImageType(file.getContentType());
                             try {
-                                Util.reduceImage(newPath,smallNewpath);
+                                Util.reduceImage(newPath,smallNewPath,smallPath);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 							reback[i][0] = newPath;
-							reback[i][1] = smallNewpath;
+							reback[i][1] = smallNewPath;
                         }
                     }
 					i++;
@@ -215,7 +215,7 @@ public class Util {
 	 * @param outPath
 	 * @return
 	 */
-	public static String reduceImage(String inPath, String outPath) throws IOException, IllegalFormatException {
+	public static String reduceImage(String inPath, String outPath, String smallPath) throws IOException, IllegalFormatException {
 		float times = 0.2f;
 		File file = new File(inPath);
 		if(!file.exists()){
@@ -235,6 +235,10 @@ public class Util {
 
 		result.getGraphics().drawImage(bufferImage.getScaledInstance(toWidth, toHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
 
+		File sfile = new File(smallPath);
+		if(!sfile.exists()){
+			sfile.mkdirs();
+		}
 		 /*输出到文件流*/
 		FileOutputStream newimage = new FileOutputStream(outPath);
 		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newimage);

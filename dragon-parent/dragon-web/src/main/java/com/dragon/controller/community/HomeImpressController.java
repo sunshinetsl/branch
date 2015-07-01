@@ -59,10 +59,18 @@ public class HomeImpressController extends BasicContorller{
 	 * @return
 	 */
 	@RequestMapping("/page")
-	public String homeImpressPage(){
+	public String homeImpressPage(int currentPage, int pageSize){
 		if(logger.isDebugEnabled()){
 			logger.debug("homeImpressPage -->start");
 		}
+		if(currentPage == 0){
+			currentPage = 1;
+		}
+		if(pageSize == 0){
+			pageSize = 10;
+		}
+		//查询家乡印象列表，分页
+		List<HomeImpress> impressList = homeImpressService.selectHomeImpressList(currentPage,pageSize);
 		return "/community/homeImpress/homeImpressPage";
 	}
 	
@@ -114,10 +122,9 @@ public class HomeImpressController extends BasicContorller{
 					throw new IllegalArgumentException("保存图片异常");
 				}
 			}
-
 		}
 		ModelAndView model = new ModelAndView();
-		model.setViewName("/homeImpress/announcePage");
+		model.setViewName("redirect:/homeImpress/page.html");
 		return model;
 	}
 

@@ -39,6 +39,8 @@ public class ImageRepository {
 
     @Basic
     @Column(name = "source_id")
+    @ManyToOne(targetEntity = HomeImpress.class)
+    @JoinColumn(name="id")
     public Integer getSourceId() {
         return sourceId;
     }

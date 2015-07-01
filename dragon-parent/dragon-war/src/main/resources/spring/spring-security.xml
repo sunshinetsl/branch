@@ -18,6 +18,7 @@
 	<http pattern="/index.jsp" security="none"/>
 	<http pattern="/home/show" security="none"/>
 	<http pattern="/homePage.html" security="none"/>
+	<http pattern="/kaptcha.jpg" security="none"/>
 	<http auto-config="true" use-expressions="true">
 		<!--<intercept-url pattern="/homeImpress/**" access="permitAll"/>-->
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>

@@ -6,5 +6,6 @@
 	<!-- 单独排除渲染的页面 -->
  	<excludes>
 		<pattern>/account/loginPage.do</pattern>
+		<pattern>/account/regPage.do</pattern>
 	</excludes>
 </decorators>

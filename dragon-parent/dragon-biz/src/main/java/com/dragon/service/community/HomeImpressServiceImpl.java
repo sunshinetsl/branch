@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dragon.dao.community.HomeImpressDAO;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("homeImpressServiceImpl")
 public class HomeImpressServiceImpl<T> implements HomeImpressService{
@@ -39,5 +40,20 @@ public class HomeImpressServiceImpl<T> implements HomeImpressService{
 		int count = homeImpressDAO.saveHomeImpress(homeImpress);
 		logger.debug("saveHomeImpress count={}",count);
 		return count;
+	}
+
+	/**
+	 * 家乡首页列表
+	 * @return
+	 */
+	@Override
+	public List<HomeImpress> selectHomeImpressList(int currentPage, int pageSize) {
+		if(currentPage == 0 || pageSize == 0){
+			return null;
+		}
+		int page = (currentPage - 1) * pageSize;
+		int rows = pageSize;
+		List<HomeImpress> impressList = homeImpressDAO.selectHomeImpressList(page, rows);
+		return impressList;
 	}
 }

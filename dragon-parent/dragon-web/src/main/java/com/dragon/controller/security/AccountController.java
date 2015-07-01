@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dragon.common.BasicContorller;
@@ -16,6 +17,8 @@ import com.dragon.dto.MessageDTO;
 import com.dragon.entity.UserInfo;
 import com.dragon.service.account.AccountService;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 账号管理
@@ -49,6 +52,16 @@ public class AccountController extends BasicContorller{
 		return new ModelAndView("/account/loginPage");
 	}
 
+	/**
+	 * 注册页面
+	 * @return
+	 */
+	@RequestMapping("/regPage")
+	public ModelAndView regPage(){
+		logger.debug("进入登录页面 -->start");
+		return new ModelAndView("/account/regPage");
+	}
+
 
 
 	/**
@@ -57,10 +70,11 @@ public class AccountController extends BasicContorller{
 	 */
 	@RequestMapping("/reg")
 	@ResponseBody
-	public ModelMap reg(String account, String passWord, String rePassWord){
+	public ModelMap reg(HttpServletRequest request, String account, String passWord, String rePassWord, String captcha){
 		if(logger.isDebugEnabled()){
 			logger.debug("reg (account={},passWord={},rePassWord={})",account, passWord, rePassWord);
 		}
+		String kaptchaExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		int count = accountService.checkAccount(account);
 		if(count > 0){
 			msg.setFlag("1");
@@ -71,6 +85,12 @@ public class AccountController extends BasicContorller{
 		if(!passWord.equals(rePassWord)){
 			msg.setFlag("1");
 			msg.setCause("两次密码输入不一样");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
+		if(!kaptchaExpected.equals(captcha)){
+			msg.setFlag("1");
+			msg.setCause("验证码输入有误");
 			model.addAttribute("callBack",msg);
 			return model;
 		}
@@ -89,8 +109,6 @@ public class AccountController extends BasicContorller{
 		return model;
 	}
 
-	
-	
 	/**
 	 * 登录验证
 	 * @param username
@@ -99,9 +117,16 @@ public class AccountController extends BasicContorller{
 	 */
 	@RequestMapping("/check")
 	@ResponseBody
-	public ModelMap check(String username, String password){
+	public ModelMap check(HttpServletRequest request, String username, String password,String captcha){
 		logger.debug("login(account={},passWord={} -->start)",username,password);
+		String kaptchaExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		UserInfo user = accountService.queryAccount(username);
+		if(!captcha.equals(kaptchaExpected)){
+			msg.setFlag("1");
+			msg.setCause("验证码输入错误！");
+			model.addAttribute("callBack",msg);
+			return model;
+		}
 		if(null == user){
 			msg.setFlag("1");
 			msg.setCause("用户名不存在");
@@ -121,16 +146,6 @@ public class AccountController extends BasicContorller{
 		return model;
 	}
 
-	/**
-	 * 登录
-	 * @return
-	 */
-	@RequestMapping("/userLogin")
-	public ModelAndView userLogin(String username, String password){
-		logger.debug("login(account={},passWord={} -->start)",username,password);
-		UserSessionInfo userInfo = (UserSessionInfo)securityUserService.loadUserByUsername(username);
-		return new ModelAndView("redirect:/homePage.html");
-	}
 
 	/**
 	 * 注销登录
