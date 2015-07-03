@@ -29,14 +29,7 @@
 	<div class="wrap">
 		<div class="header_sub">
 			<div class="h_menu">
-				<ul id="tipLabel">
-					<%-- <li class="active"><a href="${ctx}/homePage.html">介绍</a></li>
-						<li><a href="about/page">关于我们</a></li>
-						<li><a href="jsp/demo/service.html">服务</a></li>
-						<li><a href="jsp/demo/index.html">页面</a></li>
-						<li><a href="jsp/demo/blog.html">论坛</a></li>
-						<li><a href="jsp/demo/contact.html">加入我们</a></li> --%>
-				</ul>
+				<ul id="tipLabel"></ul>
 			</div>
 			<div class="h_search">
 				<form>
@@ -44,7 +37,7 @@
 					<input type="submit" value="">
 				</form>
 			</div>
-			<div class="menu">
+			<%--<div class="menu">
 				<ul>
 					<li class="active"><a href="jsp/demo/index.html">Home</a></li>
 					<li><a href="jsp/demo/about.html">About us</a></li>
@@ -53,7 +46,7 @@
 					<li><a href="jsp/demo/blog.html">Blog</a></li>
 					<li><a href="jsp/demo/contact.html">Contact us</a></li>
 				</ul>
-			</div>
+			</div>--%>
 			<div class="search">
 				<form action="/iphone/search.html">
 					<input type="text" value="Search" onFocus="this.value = '';"

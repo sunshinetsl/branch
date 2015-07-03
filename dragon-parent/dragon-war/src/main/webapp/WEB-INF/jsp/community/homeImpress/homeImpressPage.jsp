@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#homeUp').click(function(){
-		window.location.href = $('#rootPath').val()+'/homeImpress/announcePage.html';
+		window.location.href = $('#rootPath').val()+'/homeImpress/announcePage.do';
 	});
 });
 </script>
@@ -19,10 +19,10 @@ $(document).ready(function(){
 			<c:forEach items="${result.resultList}" var="list">
 				<div class="span1_of_3">
 					<c:forEach items="${list.images}" var="images" begin="0" end="0">
-						<a href="${ctx}/"><img src="${rootFilePath}${images.smallImageAddress}" alt=""></a>
+						<a href="${ctx}/homeImpress/detils.do"><img src="${rootFilePath}${images.smallImageAddress}" alt=""></a>
 					</c:forEach>
 					<div class="span1_of_3_text">
-						<h3><a href="details.html">${list.theme}</a></h3>
+						<h3><a href="${ctx}/homeImpress/detils.do">${list.theme}</a></h3>
 						<p>${list.content}</p>
 					</div>
 					<div class="ser_btn">
