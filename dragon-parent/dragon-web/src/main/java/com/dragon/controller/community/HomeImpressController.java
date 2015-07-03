@@ -1,8 +1,8 @@
 package com.dragon.controller.community;
 
-import com.dragon.bean.UserSessionInfo;
 import com.dragon.common.util.FunctionConstants;
 import com.dragon.common.util.Util;
+import com.dragon.dto.BaseSearchConditionDTO;
 import com.dragon.entity.HomeImpress;
 import com.dragon.entity.ImageRepository;
 import com.dragon.service.community.HomeImpressService;
@@ -19,19 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dragon.common.BasicContorller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 import com.dragon.entity.Area;
-
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -59,19 +49,20 @@ public class HomeImpressController extends BasicContorller{
 	 * @return
 	 */
 	@RequestMapping("/page")
-	public String homeImpressPage(int currentPage, int pageSize){
+	public ModelAndView homeImpressPage(){
 		if(logger.isDebugEnabled()){
 			logger.debug("homeImpressPage -->start");
 		}
-		if(currentPage == 0){
-			currentPage = 1;
-		}
-		if(pageSize == 0){
-			pageSize = 10;
-		}
+		BaseSearchConditionDTO searchDTO = new BaseSearchConditionDTO();
+		searchDTO.setCountPerPage(10);
+		searchDTO.setPageIndex(1);
 		//查询家乡印象列表，分页
-		List<HomeImpress> impressList = homeImpressService.selectHomeImpressList(currentPage,pageSize);
-		return "/community/homeImpress/homeImpressPage";
+		BaseSearchConditionDTO resultDTO = homeImpressService.selectHomeImpressList(searchDTO);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/community/homeImpress/homeImpressPage");
+		model.addObject("result", resultDTO);
+		model.addObject("rootFilePath",FunctionConstants.ROOT_FILE_PATH);
+		return model;
 	}
 	
 	/**
@@ -109,13 +100,16 @@ public class HomeImpressController extends BasicContorller{
 			//文件存储地址
 			String narmalFilePath = FunctionConstants.NARMAL_FILE_PATH;
 			String smallFilePath = FunctionConstants.SMALL_FILE_PATH;
-			String[][] reback = Util.upload(narmalFilePath, smallFilePath, super.getSessionUserInfo(), request);
+			String rootPath = FunctionConstants.ROOT_FILE_PATH;
+			String[][] reback = Util.upload(narmalFilePath, smallFilePath, super.getSessionUserInfo(), request,rootPath);
 			for(int i = 0; i < reback.length; i++){
+				HomeImpress impress = new HomeImpress();
+				impress.setId(count);
 				//保存图片表数据
 				ImageRepository repository = new ImageRepository();
 				repository.setImgType(FunctionConstants.HOME_IMPRESS);
 				repository.setImageAddress(reback[i][0]);
-				repository.setSourceId(count);
+				repository.setHomeImpress(homeImpress);
 				repository.setSmallImageAddress(reback[i][1]);
 				int j = imageRepositoryService.saveImages(repository);
 				if(j <= 0){
@@ -163,5 +157,19 @@ public class HomeImpressController extends BasicContorller{
 		return map;
 	}
 
+	/**
+	 * 查看详情
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/detils")
+	public ModelAndView getDetils(String id){
+		if(logger.isDebugEnabled()){
+			logger.debug("getDetils (id = {})", id);
+		}
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/community/homeImpress/homeImpressDetils");
+		return model;
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.dragon.service.community;
 
+import com.dragon.dto.BaseSearchConditionDTO;
 import com.dragon.entity.HomeImpress;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +11,5 @@ public interface HomeImpressService {
 
     int saveHomeImpress(HomeImpress homeImpress);
 
-    List<HomeImpress> selectHomeImpressList(int currentPage, int pageSize);
+    BaseSearchConditionDTO selectHomeImpressList(BaseSearchConditionDTO searchDTO);
 }

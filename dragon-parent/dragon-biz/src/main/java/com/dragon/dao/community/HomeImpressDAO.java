@@ -1,6 +1,7 @@
 package com.dragon.dao.community;
 
 import com.dragon.entity.HomeImpress;
+import com.dragon.entity.ImageRepository;
 import org.springframework.stereotype.Repository;
 
 import com.dragon.common.dao.BaseDAO;
@@ -35,15 +36,31 @@ public class HomeImpressDAO<T> extends BaseDAO<T>{
      * @param rows
      * @return
      */
-    public List<HomeImpress> selectHomeImpressList(int page, int rows) {
+    public List<HomeImpress> selectHomeImpressList(Integer page, Integer rows) {
         List<Object> params = new ArrayList<Object>();
         StringBuffer buffer = new StringBuffer();
-        buffer.append("from HomeImpress home left join ImageRepository image ");
-        buffer.append("on image.sourceId = home.id where image.imgType = 'IMPRESS' ");
-        buffer.append(" order by home.createTime desc");
+//        buffer.append("from HomeImpress h, ImageRepository r where h.id = r.homeImpress.id ");
+//        buffer.append("and r.imgType = 'IMPRESS' ");
+//        buffer.append(" order by h.createTime desc");
+        buffer.append("from HomeImpress h ");
+        buffer.append(" order by h.createTime desc");
         String hql = buffer.toString();
         List<HomeImpress> list = (List<HomeImpress>) super.find(hql, params, page, rows);
+        for (HomeImpress home :list){
+            System.out.print(home.getImages());
+        }
         return list;
     }
 
+    /**
+     * 查询总记录数
+     * @return
+     */
+    public long selectHomeImpressListCount() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("from HomeImpress h");
+        String hql = buffer.toString();
+        long count = super.count(hql);
+        return count;
+    }
 }

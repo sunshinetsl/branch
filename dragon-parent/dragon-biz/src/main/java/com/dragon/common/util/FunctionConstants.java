@@ -17,9 +17,12 @@ public class FunctionConstants {
 
 	public final static String HOME_IMPRESS = "IMPRESS";
 
+	public final static String ROOT_FILE_PATH;
+
 	static{
 		Configuration cfg = Configuration.getInstance("constant");
 		NARMAL_FILE_PATH = cfg.getValue("normalFilePath");
 		SMALL_FILE_PATH = cfg.getValue("smallFilePath");
+		ROOT_FILE_PATH = cfg.getValue("rootFilePath");
 	}
 }

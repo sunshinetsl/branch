@@ -1,14 +1,16 @@
 package com.dragon.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Created by Administrator on 2015/6/18 0018.
  */
+@SuppressWarnings("ALL")
 @Entity
 @Table(name = "t_home_impress", schema = "", catalog = "dragon")
 public class HomeImpress {
@@ -22,12 +24,11 @@ public class HomeImpress {
     private String statusCode;
     private String clickCount;
     private String commentCount;
+    private Set<ImageRepository> images = new HashSet<ImageRepository>();
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    @OneToMany(mappedBy = "role")
-    @JoinColumn(name="source_id")
     public int getId() {
         return id;
     }
@@ -124,6 +125,16 @@ public class HomeImpress {
 
     public void setCommentCount(String commentCount) {
         this.commentCount = commentCount;
+    }
+
+
+    @OneToMany(mappedBy = "homeImpress",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    public Set<ImageRepository> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<ImageRepository> images) {
+        this.images = images;
     }
 
     @Override

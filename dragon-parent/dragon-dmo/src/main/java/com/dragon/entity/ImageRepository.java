@@ -12,7 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class ImageRepository {
     private int id;
     private String imgType;
-    private Integer sourceId;
+    private HomeImpress homeImpress;
     private String imageAddress;
     private String smallImageAddress;
 
@@ -37,16 +37,14 @@ public class ImageRepository {
         this.imgType = imgType;
     }
 
-    @Basic
-    @Column(name = "source_id")
-    @ManyToOne(targetEntity = HomeImpress.class)
-    @JoinColumn(name="id")
-    public Integer getSourceId() {
-        return sourceId;
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL,optional = false)
+    @JoinColumn(name = "source_id")
+    public HomeImpress getHomeImpress() {
+        return homeImpress;
     }
 
-    public void setSourceId(Integer sourceId) {
-        this.sourceId = sourceId;
+    public void setHomeImpress(HomeImpress homeImpress) {
+        this.homeImpress = homeImpress;
     }
 
     @Basic
@@ -69,24 +67,5 @@ public class ImageRepository {
         this.smallImageAddress = smallImageAddress;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ImageRepository that = (ImageRepository) o;
-        if (id != that.id) return false;
-        if (imgType != null ? !imgType.equals(that.imgType) : that.imgType != null) return false;
-        if (sourceId != null ? !sourceId.equals(that.sourceId) : that.sourceId != null) return false;
-        if (imageAddress != null ? !imageAddress.equals(that.imageAddress) : that.imageAddress != null) return false;
-        return true;
-    }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (imgType != null ? imgType.hashCode() : 0);
-        result = 31 * result + (sourceId != null ? sourceId.hashCode() : 0);
-        result = 31 * result + (imageAddress != null ? imageAddress.hashCode() : 0);
-        return result;
-    }
 }

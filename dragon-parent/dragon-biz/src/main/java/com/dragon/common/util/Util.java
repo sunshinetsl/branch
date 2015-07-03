@@ -94,17 +94,17 @@ public class Util {
 	 * 保存文件
 	 * @return
 	 */
-	public static boolean SaveFileFromInputStream(InputStream stream, String path, long filename, String fileType){
+	public static boolean SaveFileFromInputStream(InputStream stream, String path, long filename, String fileType, String rootPath){
 		boolean flag = false;
 		FileOutputStream fs = null;
 		String suffix = getImageType(fileType);
-		File file = new File(path);
+		File file = new File(rootPath + path);
 		if(!file.exists()){
 			file.mkdirs();
-			return SaveFileFromInputStream(stream,path,filename,fileType);
+			return SaveFileFromInputStream(stream,path,filename,fileType, rootPath);
 		}
 		try {
-			fs = new FileOutputStream( path + File.separator + filename + suffix);
+			fs = new FileOutputStream(rootPath + path + File.separator + filename + suffix);
 			byte[] buffer = new byte[1024*1024];
 			int bytesum = 0;
 			int byteread = 0;
@@ -161,7 +161,7 @@ public class Util {
 	 * 上传文件
 	 * @return
 	 */
-	public static String[][] upload(String nPath, String sPath, UserSessionInfo userInfo, HttpServletRequest request){
+	public static String[][] upload(String nPath, String sPath, UserSessionInfo userInfo, HttpServletRequest request,String rootPath){
 		String[][] reback = null;
 		boolean flag = false;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -170,8 +170,7 @@ public class Util {
 		String narmalPath = nPath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",userInfo.getUserId().toString());
 		String smallPath = sPath.replaceAll("FILE-SOURCE","homeImpress").replaceAll("DATE-STR", dateStr).replaceAll("USER-ID",userInfo.getUserId().toString());
 		try {
-			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-                    request.getSession().getServletContext());
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			if (multipartResolver.isMultipart(request)) {
                 MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 
@@ -185,14 +184,14 @@ public class Util {
                         //文件名称
                         long times = System.currentTimeMillis();
                         long imageName = times + dom.nextInt(1000);
-						flag = Util.SaveFileFromInputStream(file.getInputStream(), narmalPath, imageName, file.getContentType());
+						flag = Util.SaveFileFromInputStream(file.getInputStream(), narmalPath, imageName, file.getContentType(), rootPath);
                         if(!flag){
                             break;
                         }else{
                             String newPath = narmalPath + File.separator + imageName + Util.getImageType(file.getContentType());
                             String smallNewPath = smallPath + File.separator + imageName + Util.getImageType(file.getContentType());
                             try {
-                                Util.reduceImage(newPath,smallNewPath,smallPath);
+                                Util.reduceImage(rootPath, newPath, smallNewPath, smallPath);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -215,9 +214,9 @@ public class Util {
 	 * @param outPath
 	 * @return
 	 */
-	public static String reduceImage(String inPath, String outPath, String smallPath) throws IOException, IllegalFormatException {
+	public static String reduceImage(String rootPath, String inPath, String outPath, String smallPath) throws IOException, IllegalFormatException {
 		float times = 0.2f;
-		File file = new File(inPath);
+		File file = new File(rootPath + inPath);
 		if(!file.exists()){
 			return null;
 		}
@@ -235,12 +234,12 @@ public class Util {
 
 		result.getGraphics().drawImage(bufferImage.getScaledInstance(toWidth, toHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
 
-		File sfile = new File(smallPath);
+		File sfile = new File(rootPath + smallPath);
 		if(!sfile.exists()){
 			sfile.mkdirs();
 		}
 		 /*输出到文件流*/
-		FileOutputStream newimage = new FileOutputStream(outPath);
+		FileOutputStream newimage = new FileOutputStream(rootPath + outPath);
 		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newimage);
 		JPEGEncodeParam jep = JPEGCodec.getDefaultJPEGEncodeParam(result);
             /* 压缩质量 */

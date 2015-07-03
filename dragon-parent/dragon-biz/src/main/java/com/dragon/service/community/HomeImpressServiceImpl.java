@@ -1,6 +1,7 @@
 package com.dragon.service.community;
 
 import com.dragon.common.util.FunctionConstants;
+import com.dragon.dto.BaseSearchConditionDTO;
 import com.dragon.entity.HomeImpress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,13 +48,20 @@ public class HomeImpressServiceImpl<T> implements HomeImpressService{
 	 * @return
 	 */
 	@Override
-	public List<HomeImpress> selectHomeImpressList(int currentPage, int pageSize) {
-		if(currentPage == 0 || pageSize == 0){
+	public BaseSearchConditionDTO selectHomeImpressList(BaseSearchConditionDTO searchDTO) {
+		BaseSearchConditionDTO resultDTO = new BaseSearchConditionDTO();
+		if(searchDTO.getCountPerPage() == 0 || searchDTO.getPageIndex() == 0){
 			return null;
 		}
-		int page = (currentPage - 1) * pageSize;
-		int rows = pageSize;
+		Integer page = (searchDTO.getPageIndex() - 1) * searchDTO.getCountPerPage();
+		Integer rows = searchDTO.getCountPerPage();
 		List<HomeImpress> impressList = homeImpressDAO.selectHomeImpressList(page, rows);
-		return impressList;
+		long count = homeImpressDAO.selectHomeImpressListCount();
+		resultDTO.setResultList(impressList);
+		resultDTO.setTotalRows(count);
+		resultDTO.setCountPerPage(searchDTO.getCountPerPage());
+		resultDTO.setPageIndex(searchDTO.getPageIndex());
+		resultDTO.setTotalPage(count % searchDTO.getCountPerPage() == 0 ? count % searchDTO.getCountPerPage() : searchDTO.getCountPerPage() + 1);
+		return resultDTO;
 	}
 }
